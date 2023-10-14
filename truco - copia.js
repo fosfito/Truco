@@ -9,10 +9,6 @@ const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario
     let cartaalazar="";
     const puntosdeljuego=[0,0];     //puntos de toda la partida ([Humano,Maquina])
 
-    //Array que indica que se canto para sumar los puntos
-    //puntos[envido,envido,real envido, falta envido,truco, retruco, vale 4]
-    const puntos= [false,false,false,false,false,false,false] 
-
 
 //declaracion de funciones
 function barajar()
@@ -86,6 +82,9 @@ function barajar()
 //FUNCION ENVIDO DEL USUARIO Y DE LA MAQUINA
 function envido()
 {
+    //Array que indica que se canto para sumar los puntos
+    //puntos[envido,envido,real envido, falta envido]
+    const puntos= [false,false,false,false]  
     let total=0; //Acumulador para los puntos del tanto de cada usuario
     let envidohumano=0;
     let envidolazarillo=0;
@@ -224,34 +223,21 @@ function envido()
 //funcion truco maquina y pc
 function truco()
     {
-     let restantes=""
+        let trucocantado=[false,false,false]        //variable que uso para saber si se canto truco, retruco, vale 4 y sacar los puntos
     //Juego de la carta humano
-    restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
-    cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
-   
-
-   console.log("opcion elegida: "+cartaAjugar);
+    
+    cartaAjugar=prompt("Ingrese la opcion que desea jugar: "+'\n'
+    +"1 => TIRAR "+arraymano[0][3]+" de "+palo[arraymano[0][4]]+'\n'
+    +"2 => TIRAR "+arraymano[1][3]+" de "+palo[arraymano[1][4]]+'\n'
+    +"3 => TIRAR "+arraymano[2][3]+" de "+palo[arraymano[2][4]]+'\n'
+    +"4 => CANTAR TRUCO ")
+    
     }
 
+function mostrarmenu()
+{
 
-function mostrarmenu(carta1,carta2,carta3)
-    {
-        let mensaje="";
-            if(carta1[1]==true)
-            {
-                mensaje+="1 = "+carta1[3]+" de "+palo[carta1[4]]+'\n'
-            }
-            if(carta2[1]==true)
-            {
-                mensaje+="2 = "+carta2[3]+" de "+palo[carta2[4]]+'\n'
-            }
-            if(carta3[1]==true)
-            {
-                mensaje+="3 = "+carta3[3]+" de "+palo[carta3[4]]+'\n'
-            }
-            return mensaje
-        
-    }
+}
 
 function contarpuntos(valor1,valor2)    // contar puntos del envido
     {
@@ -289,5 +275,5 @@ function evaluarenvido(envidoH, envidoL)
 
 //main del truco
 barajar();
-//envido();          //la funcion envido actualiza los puntos del juego
+envido();          //la funcion envido actualiza los puntos del juego
 truco();            
