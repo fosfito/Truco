@@ -1,0 +1,19 @@
+body
+{
+  background: gray;  
+}
+
+/*Estilo del boton barajar*/
+.Barajar{       
+        background-color: #06066e;
+        color: white;
+        border-radius: 45px;  
+        padding: 10px 20px;
+        font-weight: 900;
+        border: none;
+}
+
+.superior{
+    display: flex;
+    justify-content: space-around;
+}
