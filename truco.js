@@ -224,11 +224,32 @@ function envido()
 //funcion truco maquina y pc
 function truco()
     {
+     let bandera=true;  //verificar si la carta ya esta en la mesa
      let restantes=""
     //Juego de la carta humano
     restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
     cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
    
+    while(bandera!=false)
+    {
+        restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
+        cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
+        if((cartaAjugar>0)&&(cartaAjugar<3))
+        {
+            if(arraymano[cartaAjugar-1][1]==true)
+            {
+                bandera=false
+            }
+        }
+        else
+        {
+            if (arraymano==7)
+            {
+                bandera=false      
+            }
+        }
+
+    }
 
    console.log("opcion elegida: "+cartaAjugar);
     }
