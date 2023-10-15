@@ -274,6 +274,7 @@ function truco()
             if(cartaAjugar=="7")
                 {
                   banderacantar=false;  //si canta truco vuelve a mostrar el menu
+
                 }
                 else
                 {
@@ -283,18 +284,33 @@ function truco()
 
             alert("La carta que jugaste es...: "+arraymano[cartaAjugar][3]+" de "+palo[arraymano[cartaAjugar][4]])
             arraymano[cartaAjugar][1]=false   //marco la carta que esta en la mesa
+    }
+
+//funcion que se fija desde si es true puntos[4,5 o 6] para saber si se canto (4)truco, 5(retruco) o 6(vale4)
+function cantarTruco()  
+    {
+        let puntaje=2;
+        //defino que se canto y en base a eso devuelvo lo que se canto
+        if(puntos[4]==true)   //si 4 es true(Truco ya se canto entonces se juega retruco)
+            {
+                if (puntos[5]==true) 
+                {
+                    //se canta quiero vale 4
+                    puntaje=4;
+                }
+                else
+                {
+                    //se canta retruco
+                    puntaje=3;
+                }
+            }
+            else
+            {
+                //se canta truco
+                puntaje=2;
+            }
+        return puntaje
             
-
-
-
-
-/*      PRUEBA DE CARTA TIRADA SATISFACTORIA
-            arraymano[1][1]=false;
-            restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
-            cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
-            console.log(cartaAjugar);
-  */
-
     }
 
    
