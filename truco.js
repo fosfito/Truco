@@ -264,32 +264,36 @@ function truco()
     {
             // MANO 1 USUARIO
             let mano=1  //Indica la mano del juego (Jugador mano 1,3,5 || Lazarillo mano 2,4,6)
+            let quesecanto = 0;
             let banderacantar=false
-            while(banderacantar!=true)
-            {
+           // while(banderacantar!=true)
+           // {
             restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
             cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
-            cartaAjugar=cartaAjugar-1
-            console.log(cartaAjugar);
+            console.log(cartaAjugar-1);
             if(cartaAjugar=="7")
                 {
-                  banderacantar=false;  //si canta truco vuelve a mostrar el menu
+                //  banderacantar=false;  //si canta truco vuelve a mostrar el menu
+                  quesecanto=cantarTruco();
+                  if(quesecanto==2)quesecanto="TRUCO"
+                 // alert("Se canto: "+quesecanto)
 
+                  // --------------------- En V 2.0 modificar la IA para retrucar ------------------------------
+                  RtaIATruco();     //Lazarillo evalua si ACEPTA el truco
                 }
                 else
                 {
-                  banderacantar=true;  // Si juega una carta salgo del while
+                 // banderacantar=true;  // Si juega una carta salgo del while
+                  alert("La carta que jugaste es...: "+arraymano[cartaAjugar-1][3]+" de "+palo[arraymano[cartaAjugar-1][4]])
                 }
-            }
-
-            alert("La carta que jugaste es...: "+arraymano[cartaAjugar][3]+" de "+palo[arraymano[cartaAjugar][4]])
-            arraymano[cartaAjugar][1]=false   //marco la carta que esta en la mesa
+           // }
+           // arraymano[cartaAjugar][1]=false   //marco la carta que esta en la mesa
     }
 
-//funcion que se fija desde si es true puntos[4,5 o 6] para saber si se canto (4)truco, 5(retruco) o 6(vale4)
+//funcion que se fija desde si es true el array puntos en los indices 4,5 o 6 para saber si se canto (4)truco, 5(retruco) o 6(vale4)
 function cantarTruco()  
     {
-        let puntaje=2;
+        let puntaje=1;
         //defino que se canto y en base a eso devuelvo lo que se canto
         if(puntos[4]==true)   //si 4 es true(Truco ya se canto entonces se juega retruco)
             {
@@ -311,6 +315,26 @@ function cantarTruco()
             }
         return puntaje
             
+    }
+
+    function RtaIATruco()
+    {
+                //Lazarrillo evalua su mano para ver si acepta o no....
+                let evaluacion=0; 
+                if(arraymano[3][1]==true)    //si lazarillo aun no jugo la carta 1, la evalua
+                {
+                    evaluacion+=arraymano[3][2];
+                    console.log("Evaluacion de la carta 4: "+arraymano[3][2]);
+                }
+                if(arraymano[4][1]==true)    //si lazarillo aun no jugo la carta 2, la evalua
+                {
+                    evaluacion+=arraymano[4][2];
+                }
+                if(arraymano[5][1]==true)    //si lazarillo aun no jugo la carta 3, la evalua
+                {
+                    evaluacion+=arraymano[5][2];
+                }
+                alert("evaluacion de cartas= "+evaluacion)
     }
 
    
