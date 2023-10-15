@@ -221,59 +221,6 @@ function envido()
  
 }
 
-//funcion truco maquina y pc
-function truco()
-    {
-     let bandera=true;  //verificar si la carta ya esta en la mesa
-     let restantes=""
-    //Juego de la carta humano
-    restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
-    cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
-   
-    while(bandera!=false)
-    {
-        restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
-        cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
-        if((cartaAjugar>0)&&(cartaAjugar<3))
-        {
-            if(arraymano[cartaAjugar-1][1]==true)
-            {
-                bandera=false
-            }
-        }
-        else
-        {
-            if (arraymano==7)
-            {
-                bandera=false      
-            }
-        }
-
-    }
-
-   console.log("opcion elegida: "+cartaAjugar);
-    }
-
-
-function mostrarmenu(carta1,carta2,carta3)
-    {
-        let mensaje="";
-            if(carta1[1]==true)
-            {
-                mensaje+="1 = "+carta1[3]+" de "+palo[carta1[4]]+'\n'
-            }
-            if(carta2[1]==true)
-            {
-                mensaje+="2 = "+carta2[3]+" de "+palo[carta2[4]]+'\n'
-            }
-            if(carta3[1]==true)
-            {
-                mensaje+="3 = "+carta3[3]+" de "+palo[carta3[4]]+'\n'
-            }
-            return mensaje
-        
-    }
-
 function contarpuntos(valor1,valor2)    // contar puntos del envido
     {
             let rta=20;
@@ -303,8 +250,74 @@ function evaluarenvido(envidoH, envidoL)
 
 }
 
+
+//--------------------------------------------------------------------------------------------------------------------------
+//                                  PARTE 2 CODIFICACION DEL TRUCO
+//--------------------------------------------------------------------------------------------------------------------------
         
+// PARA HACER:
+// FUNCION CANTAR() CADA VEZ QUE LA LLAMO CANTA TRUCO/RETRUCO/VALE4 SEGUN EL CASO. DEVUELVE EL TEXTO DE LO QUE CANTA Y LA VARIABLE CON LOS PUNTOS PARA SI ES ACEPTADO SUMARLO AL TOTAL
+// FUNCION MOSTRARCARTA() MUESTRA LAS CARTAS QUE EL USUARIO TIENE EN LA MANO, DESCONTANDO LAS QUE ESTAN EN LA MESA
+// FUNCION EVALUAR: COMPARA EL RANGO DE LAS CARTAS PARA SABER QUIEN GANA => ESTA EN ARRAYMANO[CARTA][2]
+
+function truco()
+    {
+            // MANO 1 USUARIO
+            let mano=1  //Indica la mano del juego (Jugador mano 1,3,5 || Lazarillo mano 2,4,6)
+            let banderacantar=false
+            while(banderacantar!=true)
+            {
+            restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
+            cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
+            cartaAjugar=cartaAjugar-1
+            console.log(cartaAjugar);
+            if(cartaAjugar=="7")
+                {
+                  banderacantar=false;  //si canta truco vuelve a mostrar el menu
+                }
+                else
+                {
+                  banderacantar=true;  // Si juega una carta salgo del while
+                }
+            }
+
+            alert("La carta que jugaste es: "+arraymano[cartaAjugar][3]+" de "+palo[arraymano[cartaAjugar][4]])
+            arraymano[cartaAjugar][1]=false   //marco la carta que esta en la mesa
+            
+
+
+
+
+/*      PRUEBA DE CARTA TIRADA SATISFACTORIA
+            arraymano[1][1]=false;
+            restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
+            cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
+            console.log(cartaAjugar);
+  */
+
+    }
+
+   
+    //funcion truco maquina y pc
     
+    function mostrarmenu(carta1,carta2,carta3)
+    {
+        let mensaje="";
+        if(carta1[1]==true)
+            {
+            mensaje+="1 = Tirar "+carta1[3]+" de "+palo[carta1[4]]+'\n'
+            }
+        if(carta2[1]==true)
+            {
+            mensaje+="2 = Tirar "+carta2[3]+" de "+palo[carta2[4]]+'\n'
+            }
+            if(carta3[1]==true)
+            {
+            mensaje+="3 = Tirar "+carta3[3]+" de "+palo[carta3[4]]+'\n'
+            }
+            return mensaje
+    
+    }
     
 
 
