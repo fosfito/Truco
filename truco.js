@@ -18,20 +18,20 @@ const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario
 function barajar()
 {
     //FORMATO DE UNA CARTA: [FLAG 1: SI FUE DADA DEL MASO, FLAG2: SI FUE PUESTA EN LA MESA,VALOR EN EL TRUCO PARA COMPARARLAS(DE 14 A 1), NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
-    const carta =[ [true,true,14,1,0],
-                [true,true,13,1,2],
-                    [true,true,12,7,0],
-                    [true,true,11,7,1],
+    const carta =[ [true,true,24,1,0],
+                    [true,true,23,1,2],
+                    [true,true,22,7,0],
+                    [true,true,21,7,1],
                     [true,true,10,3,0],[true,true,10,3,1],[true,true,10,3,2],[true,true,10,3,3],
                     [true,true,9,2,0],[true,true,9,2,1],[true,true,9,2,2],[true,true,9,2,3],   //los 2 valen 9
                     [true,true,8,1,3],[true,true,8,1,1],    //los 1 valen 8
                     [true,true,7,12,0],[true,true,7,12,1],[true,true,7,12,2],[true,true,7,12,3],
                     [true,true,6,11,0],[true,true,6,11,1],[true,true,6,11,2],[true,true,6,11,3],
                     [true,true,5,10,0],[true,true,5,10,1],[true,true,5,10,2],[true,true,5,10,3],
-                    [true,true,4,7,1],[true,true,4,7,3],
-                    [true,true,3,6,0],[true,true,3,6,1],[true,true,3,6,2],[true,true,3,6,3],
-                    [true,true,2,5,0],[true,true,2,5,1],[true,true,2,5,2],[true,true,2,5,3],
-                    [true,true,1,4,0],[true,true,1,4,1],[true,true,1,4,2],[true,true,1,4,3] //40 cartas
+                    [true,true,2,7,1],[true,true,2,7,3],
+                    [true,true,1,6,0],[true,true,1,6,1],[true,true,1,6,2],[true,true,1,6,3],
+                    [true,true,0,5,0],[true,true,0,5,1],[true,true,0,5,2],[true,true,0,5,3],
+                    [true,true,0,4,0],[true,true,0,4,1],[true,true,0,4,2],[true,true,0,4,3] //40 cartas
     ]
 
      //selecciono una carta al azar
@@ -320,21 +320,63 @@ function cantarTruco()
     function RtaIATruco()
     {
                 //Lazarrillo evalua su mano para ver si acepta o no....
+                cantidaddecartas=1;     //Acumulador que me indica cuantas cartas menos tiene la pc para jugar
                 let evaluacion=0; 
-                if(arraymano[3][1]==true)    //si lazarillo aun no jugo la carta 1, la evalua
-                {
-                    evaluacion+=arraymano[3][2];
-                    console.log("Evaluacion de la carta 4: "+arraymano[3][2]);
+                for (let t = 3; t < 6; t++) 
+                    {
+                        if(arraymano[t][1]==true)    //si lazarillo aun no jugo la carta t, la evalua
+                        {
+                            evaluacion+=arraymano[t][2];
+                            console.log("Evaluacion de la carta 4: "+arraymano[t][2]);
+                        }
+                        else
+                        {
+                            cantidaddecartas++  //si la carta ya esta en mesa la sumo para calcular el riesgo
+                        }
+                    
                 }
-                if(arraymano[4][1]==true)    //si lazarillo aun no jugo la carta 2, la evalua
+
+                //Lazarillo responde de acuerdo a lo evaluado
+                if(cantidaddecartas==1)         //Si lazarillo todavia no jugo ninguna carta
                 {
-                    evaluacion+=arraymano[4][2];
+                    if (evaluacion<16) 
+                        {
+                            console.log("Quiero");
+                        }    
+                        else
+                        {
+                            if (evaluacion<21)
+                            {
+                            alert("Quiero RETRUCO")   
+                            }
+                            else
+                            {
+                                alert("Quiero Vale 4") 
+                            }
+                        }            
                 }
-                if(arraymano[5][1]==true)    //si lazarillo aun no jugo la carta 3, la evalua
+
+                if(cantidaddecartas==2)         //Si a lazarillo le quedan 2 cartas:
                 {
-                    evaluacion+=arraymano[5][2];
+                    if (evaluacion<6) 
+                        {
+                            console.log("Quiero");
+                        }    
+                        else
+                        {
+                            if (evaluacion<15)
+                            {
+                            alert("Quiero RETRUCO")   
+                            }
+                            else
+                            {
+                                alert("Quiero Vale 4") 
+                            }
+                        }            
                 }
-                alert("evaluacion de cartas= "+evaluacion)
+
+
+                    alert("evaluacion de cartas= "+evaluacion)
     }
 
    
