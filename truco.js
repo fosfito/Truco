@@ -279,7 +279,7 @@ function truco()
                  // alert("Se canto: "+quesecanto)
 
                   // --------------------- En V 2.0 modificar la IA para retrucar ------------------------------
-                  RtaIATruco();     //Lazarillo evalua si ACEPTA el truco
+                  let val=RtaIATruco();     //Lazarillo evalua si ACEPTA el truco
                 }
                 else
                 {
@@ -293,6 +293,7 @@ function truco()
 //funcion que se fija desde si es true el array puntos en los indices 4,5 o 6 para saber si se canto (4)truco, 5(retruco) o 6(vale4)
 function cantarTruco()  
     {
+        alert("LA carta esta en: "+puntos[4])
         let puntaje=1;
         //defino que se canto y en base a eso devuelvo lo que se canto
         if(puntos[4]==true)   //si 4 es true(Truco ya se canto entonces se juega retruco)
@@ -327,33 +328,19 @@ function cantarTruco()
                         if(arraymano[t][1]==true)    //si lazarillo aun no jugo la carta t, la evalua
                         {
                             evaluacion+=arraymano[t][2];
-                            console.log("Evaluacion de la carta 4: "+arraymano[t][2]);
+                           // console.log("Evaluacion de la carta 4: "+arraymano[t][2]);
                         }
                         else
                         {
                             cantidaddecartas++  //si la carta ya esta en mesa la sumo para calcular el riesgo
                         }
                     
-                }
+                    }
 
                 //Lazarillo responde de acuerdo a lo evaluado
                 if(cantidaddecartas==1)         //Si lazarillo todavia no jugo ninguna carta
                 {
-                    if (evaluacion<16) 
-                        {
-                            console.log("Quiero");
-                        }    
-                        else
-                        {
-                            if (evaluacion<21)
-                            {
-                            alert("Quiero RETRUCO")   
-                            }
-                            else
-                            {
-                                alert("Quiero Vale 4") 
-                            }
-                        }            
+              
                 }
 
                 if(cantidaddecartas==2)         //Si a lazarillo le quedan 2 cartas:
