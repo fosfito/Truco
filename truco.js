@@ -281,7 +281,7 @@ function truco()
                 }
             }
 
-            alert("La carta que jugaste es: "+arraymano[cartaAjugar][3]+" de "+palo[arraymano[cartaAjugar][4]])
+            alert("La carta que jugaste es...: "+arraymano[cartaAjugar][3]+" de "+palo[arraymano[cartaAjugar][4]])
             arraymano[cartaAjugar][1]=false   //marco la carta que esta en la mesa
             
 
