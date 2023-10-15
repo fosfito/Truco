@@ -254,9 +254,7 @@ function evaluarenvido(envidoH, envidoL)
 //--------------------------------------------------------------------------------------------------------------------------
 //                                  PARTE 2 CODIFICACION DEL TRUCO
 //--------------------------------------------------------------------------------------------------------------------------
-        
-// PARA HACER:
-// FUNCION CANTAR() CADA VEZ QUE LA LLAMO CANTA TRUCO/RETRUCO/VALE4 SEGUN EL CASO. DEVUELVE EL TEXTO DE LO QUE CANTA Y LA VARIABLE CON LOS PUNTOS PARA SI ES ACEPTADO SUMARLO AL TOTAL
+       
 // FUNCION MOSTRARCARTA() MUESTRA LAS CARTAS QUE EL USUARIO TIENE EN LA MANO, DESCONTANDO LAS QUE ESTAN EN LA MESA
 // FUNCION EVALUAR: COMPARA EL RANGO DE LAS CARTAS PARA SABER QUIEN GANA => ESTA EN ARRAYMANO[CARTA][2]
 
@@ -276,9 +274,6 @@ function truco()
                 //  banderacantar=false;  //si canta truco vuelve a mostrar el menu
                   quesecanto=cantarTruco();
                   if(quesecanto==2)quesecanto="TRUCO"
-                 // alert("Se canto: "+quesecanto)
-
-                  // --------------------- En V 2.0 modificar la IA para retrucar ------------------------------
                   let val=RtaIATruco();     //Lazarillo evalua si ACEPTA el truco
                 }
                 else
@@ -318,17 +313,16 @@ function cantarTruco()
             
     }
 
-    function RtaIATruco()
+    function RtaIATruco()    //true=QUIERE    FALSE=NO QUIERE
     {
                 //Lazarrillo evalua su mano para ver si acepta o no....
                 cantidaddecartas=1;     //Acumulador que me indica cuantas cartas menos tiene la pc para jugar
-                let evaluacion=0; 
+                let evaluacion=0;       //Variable donde Lazarillo calcula las respuestas
                 for (let t = 3; t < 6; t++) 
                     {
                         if(arraymano[t][1]==true)    //si lazarillo aun no jugo la carta t, la evalua
                         {
                             evaluacion+=arraymano[t][2];
-                           // console.log("Evaluacion de la carta 4: "+arraymano[t][2]);
                         }
                         else
                         {
@@ -340,30 +334,81 @@ function cantarTruco()
                 //Lazarillo responde de acuerdo a lo evaluado
                 if(cantidaddecartas==1)         //Si lazarillo todavia no jugo ninguna carta
                 {
-              
+                    if(evaluacion<15)
+                    {
+                        let IAazar=Math.floor(Math.random()*10)
+                        if(IAazar<7)        //30% de que diga que QUIERE sin tener buenas cartas
+                        {
+                         alert("LAZARILLO RESPONDE: No quiero :(");
+                         return false         
+                        }
+                        else
+                        {
+                            alert("LAZARILLO RESPONDE: Quiero")
+                            puntos[4]=true;
+                            return true
+                        }
+                    }
+                    else
+                    {
+                        alert("LAZARILLO RESPONDE: Quiero")
+                        puntos[4]=true;
+                        return true 
+                    }
                 }
 
                 if(cantidaddecartas==2)         //Si a lazarillo le quedan 2 cartas:
                 {
-                    if (evaluacion<6) 
+                    if(evaluacion<10)
+                    {
+                        let IAazar=Math.floor(Math.random()*10)
+                        if(IAazar<8)        //20% de que diga que QUIERE sin tener buenas cartas
                         {
-                            console.log("Quiero");
-                        }    
+                         alert("LAZARILLO RESPONDE: No quiero :(");
+                         return false         
+                        }
                         else
                         {
-                            if (evaluacion<15)
-                            {
-                            alert("Quiero RETRUCO")   
-                            }
-                            else
-                            {
-                                alert("Quiero Vale 4") 
-                            }
-                        }            
+                            alert("LAZARILLO RESPONDE: Quiero")
+                            puntos[4]=true;
+                            return true
+                        }
+                    }
+                    else
+                    {
+                        alert("LAZARILLO RESPONDE: Quiero")
+                        puntos[4]=true;
+                        return true 
+                    }
+                }
+
+                if(cantidaddecartas==3)         //Si a lazarillo le queda 1 carta:
+                {
+                    if(evaluacion<10)
+                    {
+                        let IAazar=Math.floor(Math.random()*10)
+                        if(IAazar<7)        //30% de que diga que QUIERE sin tener buenas cartas
+                        {
+                         alert("LAZARILLO RESPONDE: No quiero :(");
+                         return false         
+                        }
+                        else
+                        {
+                            alert("LAZARILLO RESPONDE: Quiero")
+                            puntos[4]=true;
+                            return true
+                        }
+                    }
+                    else
+                    {
+                        alert("LAZARILLO RESPONDE: Quiero")
+                        puntos[4]=true;
+                        return true 
+                    }
                 }
 
 
-                    alert("evaluacion de cartas= "+evaluacion)
+                    
     }
 
    
