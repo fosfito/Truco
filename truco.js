@@ -364,12 +364,12 @@ function truco()
                                 }
                                 return seguirjuego=false
                             }
-                            else
+                           /* else
                             {
                                 
                                 if(totalmano==0)
                                 {
-                                alert("El usuario ha ganado la partida! 2 mano")
+                                alert("LAZARILLO DICE: Me ganaste la partida, solo te estoy midiendo...")
                                 if(puntos[4]==true)
                                    {
                                     puntosdeljuego[0]+=2           //Si se canto truco en pardas USER gana 2 puntos
@@ -380,7 +380,7 @@ function truco()
                                    }
                                 }
    
-                            }
+                            } */
                         }
                         else
                         {   //Lazarillo le gana o empata en la segunda mano
