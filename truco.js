@@ -286,60 +286,62 @@ function truco()
                 
                     //Si mano=1 sumo quien gano o me fijo si es parda
                   if(mano==1)
-                  {
-                    if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
-                    { 
-
-                            alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
-                            ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
-                            totalcartas-=1      //gano el usuario resto 1
-
-                    }
-                    else
                     {
-                        if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
+                        if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
                         { 
-                            alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
-                            ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
-                            totalcartas+=1          //gano lazarillo sumo 1 
-                        } 
-                        else
-                        { 
-                            alert("Parda en primera, la proxima mano gana la partida!")
+
+                                alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                                ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
+                                totalcartas-=1      //gano el usuario resto 1
+
                         }
-
-                    }
-
-                    if(mano==2)
-                  {
-                    if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
-                    { 
-
-                            alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
-                            ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
-                            totalcartas-=1      //gano el usuario resto 1
-
-                    }
-                    else
-                    {
-                        if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
-                        { 
-                            alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
-                            ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
-                            if (totalcartas==0)     //si es parda de la mano anterior esta define todo
-                            {
-//--------------------------------------------------------TERMINAR!!!--------------------------
+                        else
+                        {
+                            if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
+                            { 
+                                alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
+                                ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
+                                totalcartas+=1          //gano lazarillo sumo 1 
+                            } 
+                            else
+                            { 
+                                alert("Parda en primera, la proxima mano gana la partida!")
                             }
-                            totalcartas+=1          //gano lazarillo sumo 1 
-                        } 
-                        else
-                        { 
-                            alert("Parda en primera, la proxima mano gana la partida!")
+
                         }
 
-                    }
+                        if(mano==2)
+                        {
+                            if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
+                            { 
 
-                  }
+                                    alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                                    ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
+                                    totalcartas-=1      //gano el usuario resto 1
+
+                            }
+                            else
+                            {
+                                if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
+                                { 
+                                    alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
+                                    ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
+                                    if (totalcartas==0)     //si es parda de la mano anterior esta define todo
+                                    {
+                                        console.log()
+        //--------------------------------------------------------TERMINAR!!!--------------------------
+                                    }
+                                    totalcartas+=1          //gano lazarillo sumo 1 
+                                } 
+                                else
+                                { 
+                                    alert("Parda en primera, la proxima mano gana la partida!")
+                                }
+
+                            }
+
+                        }
+                    }
                   mano++    //termina la primer ronda, pasamos a la siguiente
                 }
 
