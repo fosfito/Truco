@@ -14,6 +14,8 @@ const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario
     const puntos= [false,false,false,false,false,false,false] 
     const ComparadorTruco=[[1,1],[1,1]]   //En este array se guarda la carta de cada uno de cada mano indice 0=Humano 1=Lazarillo
     let seguirjuego=true;  //variable que indica si el juego sigue o se termino
+    let mano=1  //Indica la mano del juego (Jugador-maquina mano(1,2,3)
+    //para version 2.0 se modifica mano 1,3,5 || Lazarillo mano 2,4,6) (En V 2.0 Mejorarlo con un for y ronda%2 para saber cada una)
 
 
 //declaracion de funciones
@@ -60,16 +62,8 @@ function barajar()
             }
         }
 
-           //Resumen de la partida
-           console.log("Al humano le toco: "+'\n'
-           +arraymano[0][3]+" de "+palo[arraymano[0][4]]+" "+arraymano[0][0]+'\n'
-           +arraymano[1][3]+" de "+palo[arraymano[1][4]]+" "+arraymano[1][0]+'\n'
-           +arraymano[2][3]+" de "+palo[arraymano[2][4]]+" "+arraymano[2][0]+'\n'+'\n'+'\n'
-           +"A LAZARILLO le toco: "+'\n'
-           +arraymano[3][3]+" de "+palo[arraymano[3][4]]+" "+arraymano[3][0]+'\n'
-           +arraymano[4][3]+" de "+palo[arraymano[4][4]]+" "+arraymano[4][0]+'\n'
-           +arraymano[5][3]+" de "+palo[arraymano[5][4]]+" "+arraymano[5][0]+'\n');
- 
+        mostrarresumen();       //muestro resumen de cartas por consola
+           
     /* intento de cargar imagen por js en etiqueta div PREGUNTAR LUCAS
     --------------------------------------------------------------------------------------
     //document.getElementById("1").setAttribute("src", "img/3e.png")
@@ -83,7 +77,24 @@ function barajar()
     --------------------------------------------------------------------------------------
     */
 }
+function mostrarresumen()           //muestraresumen de cartas por consola
+{
+    //Resumen de la partida
+    console.log("========================================================")
+    console.log("Mano: "+mano)
+    console.log("======="+'\n');
+    console.log("Al humano le toco: "+'\n'                                  //nro de carta + palo + si fue jugada
+    +arraymano[0][3]+" de "+palo[arraymano[0][4]]+" "+arraymano[0][1]+'\n'  
+    +arraymano[1][3]+" de "+palo[arraymano[1][4]]+" "+arraymano[1][1]+'\n'
+    +arraymano[2][3]+" de "+palo[arraymano[2][4]]+" "+arraymano[2][1]+'\n'+'\n'+'\n'
+    +"A LAZARILLO le toco: "+'\n'
+    +arraymano[3][3]+" de "+palo[arraymano[3][4]]+" "+arraymano[3][1]+'\n'
+    +arraymano[4][3]+" de "+palo[arraymano[4][4]]+" "+arraymano[4][1]+'\n'
+    +arraymano[5][3]+" de "+palo[arraymano[5][4]]+" "+arraymano[5][1]+'\n');
+    console.log("========================================================")
 
+
+}
 
 //FUNCION ENVIDO DEL USUARIO Y DE LA MAQUINA
 function envido()
@@ -265,7 +276,6 @@ function truco()
             // MANO 1 USUARIO
             let val=true;
             let totalcartas = 0    //si el usuario gana -1, si la pc gana +1
-            let mano=1  //Indica la mano del juego (Jugador mano 1,3,5 || Lazarillo mano 2,4,6) (En V 2.0 Mejorarlo con un for y ronda%2)
             restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
             cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
             console.log(cartaAjugar-1);
@@ -349,6 +359,8 @@ function truco()
                         }
                     }
                   mano++    //termina la primer ronda, pasamos a la siguiente
+                  mostrarresumen()          //muestro resumen de la partida en consola para control
+                  
                 }
 
             return true
@@ -379,12 +391,12 @@ function truco()
             {
             cartaparajugar=(Math.floor(Math.random()*3))+3
             if (arraymano[cartaparajugar][1]==true) 
-                {
+                {   
+                    arraymano[cartaparajugar][1]=false //Marco la carta seleccionada como que se jugo en la mesa
                     bandera=true
                 }
             }
-            console.log(arraymano[cartaparajugar]);
-            arraymano[cartaparajugar][1]==false  //Marco la carta seleccionada como que se jugo en la mesa
+            console.log("carta jugada Lazarillo: linea 399 "+arraymano[cartaparajugar]);
             alert("LAZARILLO TIRA LA CARTA: "+arraymano[cartaparajugar][3]+" de "+palo[arraymano[cartaparajugar][4]])
             ComparadorTruco[1]=arraymano[cartaparajugar];
                 
