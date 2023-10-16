@@ -274,6 +274,7 @@ function evaluarenvido(envidoH, envidoL)
 function truco()
     {
         let totalmano = 0    //si la pc gana +1 //si pc llegqa a dos gano, sino gano el user
+        let lazarillohizoprimera=true       //Almaceno quien hizo primera por si empatan en la tercer ronda
         let val=true;
         for (let mano = 1; mano < 4; mano++) 
         {
@@ -455,20 +456,33 @@ function truco()
                         }
                         if(ComparadorTruco[0][2]==ComparadorTruco[1][2])   //si Lazarillo gana la tercera mano
                         { 
-                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, pierde frente al"+'\n'+
+                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, el igual al"+'\n'+
                         ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
-                                if(totalmano>=1)
+                                if(lazarillohizoprimera==false)
                                 {
-                                alert("LAZARILLO DICE: Me ganaste por ser mano, eso no cuenta")     //corregir a ganar quien hace primera
+                                alert("LAZARILLO DICE: Me ganaste por haber hecho primera")     
                                 if(puntos[4]==true)
                                    {
-                                    puntosdeljuego[1]+=2           //Si se canto truco Lazarillo gana 2 puntos
+                                    puntosdeljuego[0]+=2           //Si se canto truco Lazarillo gana 2 puntos
                                    }
                                     else
                                    {
-                                    puntosdeljuego[1]+=1           //si no se canto truco, Lazarillo suma un punto
+                                    puntosdeljuego[0]+=1           //si no se canto truco, Lazarillo suma un punto
                                    }
                                    return true
+                                }
+                                else
+                                {
+                                    alert("LAZARILLO DICE: Te gane y te gozo por haber hecho primera")     
+                                    if(puntos[4]==true)
+                                       {
+                                        puntosdeljuego[1]+=2           //Si se canto truco Lazarillo gana 2 puntos
+                                       }
+                                        else
+                                       {
+                                        puntosdeljuego[1]+=1           //si no se canto truco, Lazarillo suma un punto
+                                       }
+                                       return true
                                 }
                        }
                        if(ComparadorTruco[0][2]<ComparadorTruco[1][2])   //si la carta del usuario es igual
