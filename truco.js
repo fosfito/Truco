@@ -62,13 +62,13 @@ function barajar()
 
            //Resumen de la partida
            console.log("Al humano le toco: "+'\n'
-           +arraymano[0][3]+" de "+palo[arraymano[0][4]]+'\n'
-           +arraymano[1][3]+" de "+palo[arraymano[1][4]]+'\n'
-           +arraymano[2][3]+" de "+palo[arraymano[2][4]]+'\n'+'\n'+'\n'
+           +arraymano[0][3]+" de "+palo[arraymano[0][4]]+" "+arraymano[0][0]+'\n'
+           +arraymano[1][3]+" de "+palo[arraymano[1][4]]+" "+arraymano[1][0]+'\n'
+           +arraymano[2][3]+" de "+palo[arraymano[2][4]]+" "+arraymano[2][0]+'\n'+'\n'+'\n'
            +"A LAZARILLO le toco: "+'\n'
-           +arraymano[3][3]+" de "+palo[arraymano[3][4]]+'\n'
-           +arraymano[4][3]+" de "+palo[arraymano[4][4]]+'\n'
-           +arraymano[5][3]+" de "+palo[arraymano[5][4]]+'\n');
+           +arraymano[3][3]+" de "+palo[arraymano[3][4]]+" "+arraymano[3][0]+'\n'
+           +arraymano[4][3]+" de "+palo[arraymano[4][4]]+" "+arraymano[4][0]+'\n'
+           +arraymano[5][3]+" de "+palo[arraymano[5][4]]+" "+arraymano[5][0]+'\n');
  
     /* intento de cargar imagen por js en etiqueta div PREGUNTAR LUCAS
     --------------------------------------------------------------------------------------
