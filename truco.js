@@ -473,7 +473,7 @@ function truco()
                        }
                        if(ComparadorTruco[0][2]<ComparadorTruco[1][2])   //si la carta del usuario es igual
                        { 
-                       alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, es igual al"+'\n'+
+                       alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gana al"+'\n'+
                        ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
                                if(totalmano>=1)
                                {
