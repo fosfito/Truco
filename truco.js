@@ -13,6 +13,7 @@ const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario
     //puntos[envido,envido,real envido, falta envido,truco, retruco, vale 4]
     const puntos= [false,false,false,false,false,false,false] 
     const ComparadorTruco=[[1,1],[1,1]]   //En este array se guarda la carta de cada uno de cada mano indice 0=Humano 1=Lazarillo
+    let seguirjuego=true;  //variable que indica si el juego sigue o se termino
 
 
 //declaracion de funciones
@@ -282,9 +283,14 @@ function truco()
                   alert("La carta que jugaste es...: "+arraymano[cartaAjugar-1][3]+" de "+palo[arraymano[cartaAjugar-1][4]])
                   ComparadorTruco[0]=arraymano[cartaAjugar-1]
                   arraymano[cartaAjugar-1][1]=false  //La carta se puso en la mesa
-                  jugarLazarillo();     //A Lazarillo le toca jugar una carta
-                
-                    //Si mano=1 sumo quien gano o me fijo si es parda
+                  seguirjuego=jugarLazarillo();     //A Lazarillo le toca jugar una carta
+                 
+                  if(seguirjuego==false)      //si el usuario no quiere truco, termina el juego
+                  {
+                    return seguirjuego
+                  }
+                 
+                  //Si mano=1 sumo quien gano o me fijo si es parda
                   if(mano==1)
                     {
                         if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
@@ -354,7 +360,12 @@ function truco()
     {
       if (puntos[4]==false)      //Si todavia no se canto truco en el juego, Lazarillo verifica si conviene cantar
       {
-        LazarilloVerificaTruco() 
+        seguirjuego=LazarilloVerificaTruco()            //si el usuario niega el truco se acaba el juego
+        if(seguirjuego==false)
+        {
+            puntosdeljuego[1]+=1
+            return seguirjuego
+        }
         Lazarillotiracarta()
       }
                  
@@ -364,7 +375,7 @@ function truco()
         {
             let cartaparajugar
             let bandera=false;
-            while(bandera!=true)
+            while(bandera!=true)                //Lazarillo elije una carta al azar de las que no estan en la mesa
             {
             cartaparajugar=(Math.floor(Math.random()*3))+3
             if (arraymano[cartaparajugar][1]==true) 
@@ -374,7 +385,7 @@ function truco()
             }
             console.log(arraymano[cartaparajugar]);
             arraymano[cartaparajugar][1]==false  //Marco la carta seleccionada como que se jugo en la mesa
-            alert("Lazarillo tira la carta: "+arraymano[cartaparajugar][3]+" de "+palo[arraymano[cartaparajugar][4]])
+            alert("LAZARILLO TIRA LA CARTA: "+arraymano[cartaparajugar][3]+" de "+palo[arraymano[cartaparajugar][4]])
             ComparadorTruco[1]=arraymano[cartaparajugar];
                 
 
@@ -385,7 +396,7 @@ function truco()
         //   1) LAZARILLO VERIFICA EN BASE A LAS CARTAS QUE LE QUEDAN Y SI NO SE CANTO TRUCO SI EL VA A  CANTAR
         cantidaddecartas=1;     //Acumulador que me indica cuantas cartas menos tiene la pc para jugar
         let evaluacion=0;       //Variable donde Lazarillo calcula las respuestas
-        for (let t = 3; t < 6; t++) 
+            for (let t = 3; t < 6; t++) 
             {
                 if(arraymano[t][1]==true)    //si lazarillo aun no jugo la carta t, la evalua
                 {
@@ -581,5 +592,5 @@ function truco()
 //main del truco
 barajar();
 //envido();          //la funcion envido actualiza los puntos del juego
-let valorauxiliar=truco();
+seguirjuego=truco();
 alert("Puntaje final: "+puntosdeljuego)
