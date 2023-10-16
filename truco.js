@@ -357,6 +357,21 @@ function truco()
                                         }
                                         return seguirjuego=false
                                     }
+                                    else
+                                    {
+                                        if(totalcartas<0)
+                                        {
+                                            Alert("El usuario ha ganado la partida!")
+                                            if(puntos[4]==true)
+                                            {
+                                                puntosdeljuego[0]+=2           //Si se canto truco en pardas USER gana 2 puntos
+                                            }
+                                            else
+                                            {
+                                                puntosdeljuego[0]+=1           //si no se canto truco, en pardas user suma un punto
+                                            }
+                                        }
+                                    }
                                     totalcartas-=1      //gano el usuario resto 1
 
                             }
@@ -403,6 +418,10 @@ function truco()
             puntosdeljuego[1]+=1
             return seguirjuego
         }
+        Lazarillotiracarta()
+      }
+      else          //Si se canto truco lazarillo evalua la carta a tirar
+      {
         Lazarillotiracarta()
       }
                  
