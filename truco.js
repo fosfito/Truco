@@ -14,8 +14,6 @@ const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario
     const puntos= [false,false,false,false,false,false,false] 
     const ComparadorTruco=[[1,1],[1,1]]   //En este array se guarda la carta de cada uno de cada mano indice 0=Humano 1=Lazarillo
     let seguirjuego=true;  //variable que indica si el juego sigue o se termino
-   
-  
 
 
 //declaracion de funciones
@@ -354,6 +352,7 @@ function truco()
 
                         if (totalmano==555)   //verifico si vengo de parda desde la primer mano
                             {
+                                alert("LAZARILLO DICE: Me ganaste la partida, solo te estoy midiendo...") 
                                 if(puntos[4]==true)
                                 {
                                 puntosdeljuego[0]+=2           //Si se canto truco en pardas USER gana 2 puntos
@@ -364,23 +363,6 @@ function truco()
                                 }
                                 return seguirjuego=false
                             }
-                           /* else
-                            {
-                                
-                                if(totalmano==0)
-                                {
-                                alert("LAZARILLO DICE: Me ganaste la partida, solo te estoy midiendo...")
-                                if(puntos[4]==true)
-                                   {
-                                    puntosdeljuego[0]+=2           //Si se canto truco en pardas USER gana 2 puntos
-                                   }
-                                    else
-                                   {
-                                    puntosdeljuego[0]+=1           //si no se canto truco, en pardas user suma un punto
-                                   }
-                                }
-   
-                            } */
                         }
                         else
                         {   //Lazarillo le gana o empata en la segunda mano
@@ -390,15 +372,17 @@ function truco()
                                 ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
                                 if (totalmano==555)     //si es parda de la mano anterior esta define todo
                                 {
-                                    console.log()
+                                    console.log("LAZARILLO DICE: La vida es justa...te gané el truco sin esfuerzo!")
                                 }
                                 totalmano+=1          //gano lazarillo sumo 1 
                             } 
                             else
                             { 
-                                if(ComparadorTruco[1][2]==ComparadorTruco[0][2])   //si parda en la segunda ronda
-                                alert("Parda en segunda")
-                                totalmano=555
+                                if(ComparadorTruco[1][2]==ComparadorTruco[0][2])   
+                                alert("LAZARILLO DICE: Estoy de malas...me voy al mazo")
+                                puntosdeljuego[0]+=1
+                                return true
+                                
                             }
 
                         }
@@ -528,10 +512,8 @@ function truco()
                  console.log("Mano: "+mano+"- Puntos de Lazarillo: "+totalmano);        //muestro los puntos de la pc
                  mostrarresumen()          //muestro resumen de la partida en consola para control
                 }
-            
         }
-        
-            return true
+        return true
     }
     
     
@@ -570,8 +552,6 @@ function truco()
             }
             alert("LAZARILLO TIRA LA CARTA: "+arraymano[cartaparajugar][3]+" de "+palo[arraymano[cartaparajugar][4]])
             ComparadorTruco[1]=arraymano[cartaparajugar];
-                
-
         }
 
     function LazarilloVerificaTruco()
@@ -647,7 +627,6 @@ function truco()
                     return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO");    
                 }
             }
-
     }
 
     function RtaIATruco()    //true=QUIERE    FALSE=NO QUIERE
@@ -665,7 +644,6 @@ function truco()
                         {
                             cantidaddecartas++  //si la carta ya esta en mesa la sumo para calcular el riesgo
                         }
-                    
                     }
 
                 //Lazarillo responde de acuerdo a lo evaluado
@@ -746,8 +724,6 @@ function truco()
     }
 
    
-    //funcion truco maquina y pc
-    
     function mostrarmenu(carta1,carta2,carta3)
     {
         let mensaje="";
@@ -767,11 +743,12 @@ function truco()
     
     }
     
+//--------------------------------------------------------------------------
+//-------------         main del truco    ----------------------------------
+//--------------------------------------------------------------------------
 
-
-//main del truco
 barajar();
-//envido();          //la funcion envido actualiza los puntos del juego
+envido();          //la funcion envido actualiza los puntos del juego
 seguirjuego=truco();
 alert("JUEGO TERMINADO"+'\n\n'+"Puntaje final: "+'\n'+
         "Usuario: "+puntosdeljuego[0]+'\n'+
