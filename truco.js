@@ -32,7 +32,7 @@ function barajar()
                     [true,true,7,12,0],[true,true,7,12,1],[true,true,7,12,2],[true,true,7,12,3],
                     [true,true,6,11,0],[true,true,6,11,1],[true,true,6,11,2],[true,true,6,11,3],
                     [true,true,5,10,0],[true,true,5,10,1],[true,true,5,10,2],[true,true,5,10,3],
-                    [true,true,3,7,1],[true,true,3,7,3],
+                    [true,true,3,7,2],[true,true,3,7,3],
                     [true,true,2,6,0],[true,true,2,6,1],[true,true,2,6,2],[true,true,2,6,3],
                     [true,true,1,5,0],[true,true,1,5,1],[true,true,1,5,2],[true,true,1,5,3],
                     [true,true,0,4,0],[true,true,0,4,1],[true,true,0,4,2],[true,true,0,4,3] //40 cartas
@@ -743,9 +743,6 @@ function truco()
                         return true 
                     }
                 }
-
-
-                    
     }
 
    
