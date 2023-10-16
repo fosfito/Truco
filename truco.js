@@ -12,6 +12,7 @@ const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario
     //Array que indica que se canto para sumar los puntos
     //puntos[envido,envido,real envido, falta envido,truco, retruco, vale 4]
     const puntos= [false,false,false,false,false,false,false] 
+    const ComparadorTruco=[[1,1],[1,1]]   //En este array se guarda la carta de cada uno de cada mano indice 0=Humano 1=Lazarillo
 
 
 //declaracion de funciones
@@ -28,9 +29,9 @@ function barajar()
                     [true,true,7,12,0],[true,true,7,12,1],[true,true,7,12,2],[true,true,7,12,3],
                     [true,true,6,11,0],[true,true,6,11,1],[true,true,6,11,2],[true,true,6,11,3],
                     [true,true,5,10,0],[true,true,5,10,1],[true,true,5,10,2],[true,true,5,10,3],
-                    [true,true,2,7,1],[true,true,2,7,3],
-                    [true,true,1,6,0],[true,true,1,6,1],[true,true,1,6,2],[true,true,1,6,3],
-                    [true,true,0,5,0],[true,true,0,5,1],[true,true,0,5,2],[true,true,0,5,3],
+                    [true,true,3,7,1],[true,true,3,7,3],
+                    [true,true,2,6,0],[true,true,2,6,1],[true,true,2,6,2],[true,true,2,6,3],
+                    [true,true,1,5,0],[true,true,1,5,1],[true,true,1,5,2],[true,true,1,5,3],
                     [true,true,0,4,0],[true,true,0,4,1],[true,true,0,4,2],[true,true,0,4,3] //40 cartas
     ]
 
@@ -163,12 +164,12 @@ function envido()
      }
 
     //TURNO ENVIDO PC (Lazarillo)
-    //Lazarillo tiene las cartas arraymano[3]//arraymano[5]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
+    //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
     if(puntos[0]==false)
     { //si el usuario no canto envido, lazarillo revisa si tiene puntos
         if((arraymano[3][4]==arraymano[4][4])&&(arraymano[4][4]==arraymano[5][4]))
         {
-            alert("USUARIO CANTA: Cómo lágrimas de olvido como suspiros de amor, cantaba sus grandes penas un pájaro en una FLOR.");
+            alert("LAZARILLO CANTA: Cómo lágrimas de olvido como suspiros de amor, cantaba sus grandes penas un pájaro en una FLOR.");
             puntos[0]=true;
             puntosdeljuego[1]+=3 //suma tres puntos lazarillo por flor
         }
@@ -189,7 +190,7 @@ function envido()
             }
             else
             {
-                //CAPACIDAD DE MENTIR Y SALIR A ROBAR PUNTOS DE LAZARILLO AL 33%
+                //CAPACIDAD DE MENTIR Y SALIR A ROBAR PUNTOS DE LAZARILLO AL 25%
                 if((Math.floor(Math.random()*3))<1)
                 {
                     puntos[0]=true;  //marco que se canto envido
@@ -261,56 +262,196 @@ function evaluarenvido(envidoH, envidoL)
 function truco()
     {
             // MANO 1 USUARIO
-            let mano=1  //Indica la mano del juego (Jugador mano 1,3,5 || Lazarillo mano 2,4,6)
-            let quesecanto = 0;
-            let banderacantar=false
-           // while(banderacantar!=true)
-           // {
+            let val=true;
+            let totalcartas = 0    //si el usuario gana -1, si la pc gana +1
+            let mano=1  //Indica la mano del juego (Jugador mano 1,3,5 || Lazarillo mano 2,4,6) (En V 2.0 Mejorarlo con un for y ronda%2)
             restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
             cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
             console.log(cartaAjugar-1);
             if(cartaAjugar=="7")
+            {
+                val=RtaIATruco();     //Lazarillo evalua si ACEPTA el truco
+                if(val==false)
                 {
-                //  banderacantar=false;  //si canta truco vuelve a mostrar el menu
-                  quesecanto=cantarTruco();
-                  if(quesecanto==2)quesecanto="TRUCO"
-                  let val=RtaIATruco();     //Lazarillo evalua si ACEPTA el truco
+                    puntosdeljuego[0]+=1; //Si Lazarillo rechaza el truco sumo un punto de truco no querido
+                    return true
+                }
                 }
                 else
                 {
-                 // banderacantar=true;  // Si juega una carta salgo del while
                   alert("La carta que jugaste es...: "+arraymano[cartaAjugar-1][3]+" de "+palo[arraymano[cartaAjugar-1][4]])
+                  ComparadorTruco[0]=arraymano[cartaAjugar-1]
+                  arraymano[cartaAjugar-1][1]=false  //La carta se puso en la mesa
+                  jugarLazarillo();     //A Lazarillo le toca jugar una carta
+                
+                    //Si mano=1 sumo quien gano o me fijo si es parda
+                  if(mano==1)
+                  {
+                    if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
+                    { 
+
+                            alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                            ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
+                            totalcartas-=1      //gano el usuario resto 1
+
+                    }
+                    else
+                    {
+                        if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
+                        { 
+                            alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
+                            ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
+                            totalcartas+=1          //gano lazarillo sumo 1 
+                        } 
+                        else
+                        { 
+                            alert("Parda en primera, la proxima mano gana la partida!")
+                        }
+
+                    }
+
+                    if(mano==2)
+                  {
+                    if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
+                    { 
+
+                            alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                            ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
+                            totalcartas-=1      //gano el usuario resto 1
+
+                    }
+                    else
+                    {
+                        if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
+                        { 
+                            alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
+                            ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
+                            if (totalcartas==0)     //si es parda de la mano anterior esta define todo
+                            {
+//--------------------------------------------------------TERMINAR!!!--------------------------
+                            }
+                            totalcartas+=1          //gano lazarillo sumo 1 
+                        } 
+                        else
+                        { 
+                            alert("Parda en primera, la proxima mano gana la partida!")
+                        }
+
+                    }
+
+                  }
+                  mano++    //termina la primer ronda, pasamos a la siguiente
                 }
-           // }
-           // arraymano[cartaAjugar][1]=false   //marco la carta que esta en la mesa
+
+            return true
+    }
+    
+    
+    //-------------------  FUNCION JUGAR CARTA LAZARILLO ---------------------------------------------------------------
+    function jugarLazarillo()
+    {
+      if (puntos[4]==false)      //Si todavia no se canto truco en el juego, Lazarillo verifica si conviene cantar
+      {
+        LazarilloVerificaTruco() 
+        Lazarillotiracarta()
+      }
+                 
     }
 
-//funcion que se fija desde si es true el array puntos en los indices 4,5 o 6 para saber si se canto (4)truco, 5(retruco) o 6(vale4)
-function cantarTruco()  
-    {
-        alert("LA carta esta en: "+puntos[4])
-        let puntaje=1;
-        //defino que se canto y en base a eso devuelvo lo que se canto
-        if(puntos[4]==true)   //si 4 es true(Truco ya se canto entonces se juega retruco)
+    function Lazarillotiracarta()
+        {
+            let cartaparajugar
+            let bandera=false;
+            while(bandera!=true)
             {
-                if (puntos[5]==true) 
+            cartaparajugar=(Math.floor(Math.random()*3))+3
+            if (arraymano[cartaparajugar][1]==true) 
                 {
-                    //se canta quiero vale 4
-                    puntaje=4;
+                    bandera=true
+                }
+            }
+            console.log(arraymano[cartaparajugar]);
+            arraymano[cartaparajugar][1]==false  //Marco la carta seleccionada como que se jugo en la mesa
+            alert("Lazarillo tira la carta: "+arraymano[cartaparajugar][3]+" de "+palo[arraymano[cartaparajugar][4]])
+            ComparadorTruco[1]=arraymano[cartaparajugar];
+                
+
+        }
+
+    function LazarilloVerificaTruco()
+    {
+        //   1) LAZARILLO VERIFICA EN BASE A LAS CARTAS QUE LE QUEDAN Y SI NO SE CANTO TRUCO SI EL VA A  CANTAR
+        cantidaddecartas=1;     //Acumulador que me indica cuantas cartas menos tiene la pc para jugar
+        let evaluacion=0;       //Variable donde Lazarillo calcula las respuestas
+        for (let t = 3; t < 6; t++) 
+            {
+                if(arraymano[t][1]==true)    //si lazarillo aun no jugo la carta t, la evalua
+                {
+                    evaluacion+=arraymano[t][2];
                 }
                 else
                 {
-                    //se canta retruco
-                    puntaje=3;
+                    cantidaddecartas++  //si la carta ya esta en mesa la sumo para calcular el riesgo
+                }
+            
+            }
+            if(cantidaddecartas==1)         //Si lazarillo todavia no jugo ninguna carta
+            {
+                if(evaluacion<20)
+                {
+                    let IAazar=Math.floor(Math.random()*10)
+                    if(IAazar<3)        //30% de que diga que TRUCO sin tener buenas cartas
+                    {
+                        puntos[4]=true     //marco que se canto truco
+                        return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO"); 
+                    }
+                    
+                }
+                else
+                {
+                    puntos[4]=true     //marco que se canto truco  
+                    return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO");    
                 }
             }
-            else
+
+            if(cantidaddecartas==2)         //Si lazarillo ya jugo una carta
             {
-                //se canta truco
-                puntaje=2;
+                if(evaluacion<10)
+                {
+                    let IAazar=Math.floor(Math.random()*10)
+                    if(IAazar<3)        //30% de que diga que TRUCO sin tener buenas cartas
+                    {
+                        puntos[4]=true     //marco que se canto truco
+                        return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO"); 
+                    }
+                    
+                }
+                else
+                {
+                    puntos[4]=true     //marco que se canto truco  
+                    return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO");    
+                }
             }
-        return puntaje
-            
+        
+            if(cantidaddecartas==3)         //Si lazarillo esta en la ultima mano
+            {
+                if(evaluacion<6)
+                {
+                    let IAazar=Math.floor(Math.random()*10)
+                    if(IAazar<3)        //30% de que diga que TRUCO sin tener buenas cartas
+                    {
+                        puntos[4]=true     //marco que se canto truco
+                        return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO"); 
+                    }
+                    
+                }
+                else
+                {
+                    puntos[4]=true     //marco que se canto truco  
+                    return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO");    
+                }
+            }
+
     }
 
     function RtaIATruco()    //true=QUIERE    FALSE=NO QUIERE
@@ -438,4 +579,5 @@ function cantarTruco()
 //main del truco
 barajar();
 //envido();          //la funcion envido actualiza los puntos del juego
-truco();            
+let valorauxiliar=truco();
+alert("Puntaje final: "+puntosdeljuego)
