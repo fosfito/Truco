@@ -398,7 +398,7 @@ function truco()
 
                         }
                     }
-                  mano++    //termina la primer ronda, pasamos a la siguiente
+                  
                   mostrarresumen()          //muestro resumen de la partida en consola para control
                   
                 }
@@ -649,4 +649,6 @@ function truco()
 barajar();
 //envido();          //la funcion envido actualiza los puntos del juego
 seguirjuego=truco();
-alert("Puntaje final: "+puntosdeljuego)
+alert("JUEGO TERMINADO"+'\n\n'+"Puntaje final: "+'\n'+
+        "Usuario: "+puntosdeljuego[0]+'\n'+
+        "Lazarillo: "+puntosdeljuego[1])
