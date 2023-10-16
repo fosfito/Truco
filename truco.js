@@ -424,8 +424,8 @@ function truco()
                     {
                         if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
                         { 
-                        alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
-                        ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
+                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                        ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo ☺")
                                 if(totalmano>=2)
                                 {
                                 alert("LAZARILLO DICE: Me ganaste de una manera muy lastimosa.")
