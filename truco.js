@@ -296,6 +296,7 @@ function truco()
                     else                //si apreta 7 y el user canto truco cuando ya estaba jugado, lazarillo le advierte
                     {
                         alert("LAZARILLO DICE: Paisano, el nombre del juego ya esta cantado, presta mas atencion")
+                        mano--
                     }
                 }
                 else
