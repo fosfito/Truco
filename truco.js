@@ -362,10 +362,10 @@ function truco()
                                 puntosdeljuego[0]+=1           //si no se canto truco, en pardas user suma un punto
                                 }
                                 return seguirjuego=false
-                            }
+                            }//---------------
                         }
                         else
-                        {   //Lazarillo le gana o empata en la segunda mano
+                        {   //Lazarillo le gana en la segunda mano
                             if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
                             { 
                                 alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
