@@ -280,13 +280,28 @@ function truco()
             val=true        //reseteo variable de retorno de funcion
             restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
             
-
+//--------------------------
             //valido apretar menu
-          //  while(banderamenu!=true)
-          //  {
-           cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
-         //  if((cartaAjugar)
-         //   }
+            //  while(banderamenu!=true)
+            //  {
+                cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
+            //    if(((cartaAjugar==1)&&(arraymano[cartaalazar][0]==false))||((cartaAjugar==2)&&(arraymano[cartaalazar][0]==false))||((cartaAjugar==3)&&(arraymano[cartaalazar][0]==false))||(cartaAjugar==7))
+            //    {
+            //      banderamenu=true      
+            //    }
+                /*
+                if((cartaAjugar==2)&&(arraymano[cartaalazar][0]==false))
+                {
+                  banderamenu=true      
+                }
+                if((cartaAjugar==3)&&(arraymano[cartaalazar][0]==false))
+                {
+                  banderamenu=true      
+                } */
+
+
+            //  }
+//---------------------------
             console.log(cartaAjugar-1);
             if((cartaAjugar=="7"))     
                 {
@@ -308,6 +323,7 @@ function truco()
                 else
                 {
                   alert("La carta que jugaste es...: "+arraymano[cartaAjugar-1][3]+" de "+palo[arraymano[cartaAjugar-1][4]])
+                 
                   ComparadorTruco[0]=arraymano[cartaAjugar-1]
                   arraymano[cartaAjugar-1][1]=false  //La carta se puso en la mesa
                   seguirjuego=jugarLazarillo();     //A Lazarillo le toca jugar una carta
