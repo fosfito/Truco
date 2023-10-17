@@ -274,11 +274,19 @@ function truco()
         let totalmano = 0    //si la pc gana +1 //si pc llegqa a dos gano, sino gano el user
         let lazarillohizoprimera=true       //Almaceno quien hizo primera por si empatan en la tercer ronda
         let val=true;
+        let banderamenu=false;
         for (let mano = 1; mano < 4; mano++) 
         {
             val=true        //reseteo variable de retorno de funcion
             restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
+            
+
+            //valido apretar menu
+            while(banderamenu!=true)
+            {
             cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
+            if((cartaAjugar)
+            }
             console.log(cartaAjugar-1);
             if((cartaAjugar=="7"))     
                 {
