@@ -282,11 +282,11 @@ function truco()
             
 
             //valido apretar menu
-            while(banderamenu!=true)
-            {
-            cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
-            if((cartaAjugar)
-            }
+          //  while(banderamenu!=true)
+          //  {
+           cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
+         //  if((cartaAjugar)
+         //   }
             console.log(cartaAjugar-1);
             if((cartaAjugar=="7"))     
                 {
