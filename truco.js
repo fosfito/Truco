@@ -761,3 +761,5 @@ seguirjuego=truco();
 alert("JUEGO TERMINADO"+'\n\n'+"Puntaje final: "+'\n'+
         "Usuario: "+puntosdeljuego[0]+'\n'+
         "Lazarillo: "+puntosdeljuego[1])
+
+        //fin?
