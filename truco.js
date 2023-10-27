@@ -123,7 +123,6 @@ function envido()
             envidohumano=contarpuntos(arraymano[2][3],arraymano[1][3]);
         }
     
-    
     //Si humano no tiene tantos informa la carta mas alta
     //el humano tiene las cartas arraymano[0]//arraymano[3]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
     if((arraymano[0][4]!=arraymano[1][4])&&(arraymano[1][4]!=arraymano[2][4])&&(arraymano[0][4]!=arraymano[2][4]))
@@ -141,12 +140,8 @@ function envido()
             {
                 envidohumano=arraymano[2][3]
             }  
-       // console.log("Los puntos del usuario son: "+puntos_unacarta);
-       // envidohumano=puntos_unacarta;
     }
 
-
-    
     //lazarillo mira cuantos puntos de envido tiene
     if(arraymano[3][4]==arraymano[4][4])            //palo3=palo4
         {
@@ -162,10 +157,9 @@ function envido()
         }
 
     //Si Lazarillo no tiene tantos halla la carta mas alta para saber los puntos
-    //el humano tiene las cartas arraymano[0]//arraymano[3]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
+    //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NRO_CARTA, PALO_Carta (VALOR (0-3) que trae del arraypalo)]
     if((arraymano[3][4]!=arraymano[4][4])&&(arraymano[4][4]!=arraymano[5][4])&&(arraymano[3][4]!=arraymano[5][4]))
     {
-       // let puntos_unacarta=0;
         if(arraymano[3][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
             {
                 envidolazarillo=arraymano[3][3]
@@ -304,7 +298,7 @@ function evaluarenvido(envidoH, envidoL)
 
 function truco()
     {
-        let totalmano = 0    //si la pc gana +1 //si pc llegqa a dos gano, sino gano el user
+        let totalmano = 0    //si la pc gana +1 //si pc llega a dos gano, sino gano el user
         let lazarillohizoprimera=true       //Almaceno quien hizo primera por si empatan en la tercer ronda
         let val=true;
         let banderamenu=false;
@@ -315,25 +309,9 @@ function truco()
  
             //--------------------------
             //valido apretar menu
-            //  while(banderamenu!=true)
-            //  {
+
                 cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
-            //    if(((cartaAjugar==1)&&(arraymano[cartaalazar][0]==false))||((cartaAjugar==2)&&(arraymano[cartaalazar][0]==false))||((cartaAjugar==3)&&(arraymano[cartaalazar][0]==false))||(cartaAjugar==7))
-            //    {
-            //      banderamenu=true      
-            //    }
-                /*
-                if((cartaAjugar==2)&&(arraymano[cartaalazar][0]==false))
-                {
-                  banderamenu=true      
-                }
-                if((cartaAjugar==3)&&(arraymano[cartaalazar][0]==false))
-                {
-                  banderamenu=true      
-                } */
 
-
-            //  }
 //---------------------------
             console.log(cartaAjugar-1);
             if((cartaAjugar=="7"))     
@@ -355,6 +333,15 @@ function truco()
                 }
                 else
                 {
+                    
+                    if ((cartaAjugar=="1")||(cartaAjugar=="2")||(cartaAjugar=="3")||(cartaAjugar=="7")) 
+                    {
+                        console.log("OK");
+                    } 
+                    else 
+                    {
+                        alert("OPCION NO VALIDA")
+                    }
                   alert("La carta que jugaste es...: "+arraymano[cartaAjugar-1][3]+" de "+palo[arraymano[cartaAjugar-1][4]])
                  
                   ComparadorTruco[0]=arraymano[cartaAjugar-1]
@@ -771,8 +758,7 @@ function truco()
                     }
                 }
     }
-
-   
+ 
     function mostrarmenu(carta1,carta2,carta3)
     {
         let mensaje="";
@@ -797,8 +783,8 @@ function truco()
 //--------------------------------------------------------------------------
 
 barajar();
-envido();          //la funcion envido actualiza los puntos del juego
-//seguirjuego=truco();
+//envido();          //la funcion envido actualiza los puntos del juego
+seguirjuego=truco();
 alert("JUEGO TERMINADO"+'\n\n'+"Puntaje final: "+'\n'+
         "Usuario: "+puntosdeljuego[0]+'\n'+
         "Lazarillo: "+puntosdeljuego[1])
