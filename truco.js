@@ -126,7 +126,7 @@ function envido()
     
     //Si humano no tiene tantos informa la carta mas alta
     //el humano tiene las cartas arraymano[0]//arraymano[3]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
-    if((arraymano[0][4]!=arraymano[1][4])&&(arraymano[1][4]!=arraymano[2][4]))
+    if((arraymano[0][4]!=arraymano[1][4])&&(arraymano[1][4]!=arraymano[2][4])&&(arraymano[0][4]!=arraymano[2][4]))
     {
        // let puntos_unacarta=0;
         if(arraymano[0][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
@@ -160,6 +160,25 @@ function envido()
         {
             envidolazarillo=contarpuntos(arraymano[4][3],arraymano[5][3]);
         }
+
+    //Si Lazarillo no tiene tantos halla la carta mas alta para saber los puntos
+    //el humano tiene las cartas arraymano[0]//arraymano[3]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
+    if((arraymano[3][4]!=arraymano[4][4])&&(arraymano[4][4]!=arraymano[5][4])&&(arraymano[3][4]!=arraymano[5][4]))
+    {
+       // let puntos_unacarta=0;
+        if(arraymano[3][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
+            {
+                envidolazarillo=arraymano[3][3]
+            }  
+        if((arraymano[4][3]<=7)&&(arraymano[4][3]>envidolazarillo))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+            {
+                envidolazarillo=arraymano[4][3]
+            }
+        if((arraymano[5][3]<=7)&&(arraymano[5][3]>envidolazarillo))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+            {
+                envidolazarillo=arraymano[5][3]
+            }  
+    }
 
         //despues que lazarillo y humano contaron los puntos el humano pregunta por envido
         if(confirm("Te tocaron "+envidohumano+" puntos"+'\n'+"Queres cantarle ENVIDO?"))
