@@ -90,8 +90,6 @@ function mostrarresumen()           //muestraresumen de cartas por consola
     +arraymano[4][3]+" de "+palo[arraymano[4][4]]+" "+arraymano[4][1]+'\n'
     +arraymano[5][3]+" de "+palo[arraymano[5][4]]+" "+arraymano[5][1]+'\n');
     console.log("========================================================")
-
-
 }
 
 //FUNCION ENVIDO DEL USUARIO Y DE LA MAQUINA
@@ -124,6 +122,30 @@ function envido()
         {
             envidohumano=contarpuntos(arraymano[2][3],arraymano[1][3]);
         }
+    
+    
+    //Si humano no tiene tantos informa la carta mas alta
+    //el humano tiene las cartas arraymano[0]//arraymano[3]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
+    if((arraymano[0][4]!=arraymano[1][4])&&(arraymano[1][4]!=arraymano[2][4]))
+    {
+       // let puntos_unacarta=0;
+        if(arraymano[0][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
+            {
+                envidohumano=arraymano[0][3]
+            }  
+        if((arraymano[1][3]<=7)&&(arraymano[1][3]>envidohumano))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+            {
+                envidohumano=arraymano[1][3]
+            }
+        if((arraymano[2][3]<=7)&&(arraymano[2][3]>envidohumano))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+            {
+                envidohumano=arraymano[2][3]
+            }  
+       // console.log("Los puntos del usuario son: "+puntos_unacarta);
+       // envidohumano=puntos_unacarta;
+    }
+
+
     
     //lazarillo mira cuantos puntos de envido tiene
     if(arraymano[3][4]==arraymano[4][4])            //palo3=palo4
@@ -167,11 +189,9 @@ function envido()
                 alert("JUGADOR DICE: Envido !"+'\n'+
                 "LAZARILLO RESPONDE: El que huye sirve para otra batalla, NO QUIERO");
                 puntosdeljuego[0]+=1 //suma un punto el usuario
-                
-            }
+              }
         }
-        
-     }
+      }
 
     //TURNO ENVIDO PC (Lazarillo)
     //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
@@ -222,15 +242,12 @@ function envido()
                         alert("Es muy facil mentirte sin puntos")
                     }
                 }
-
             }
-
         }
     }
     }
     alert("Humano: "+puntosdeljuego[0]+" // Lazarillo: "+puntosdeljuego[1])
- 
-}
+ }
 
 function contarpuntos(valor1,valor2)    // contar puntos del envido
     {
@@ -258,14 +275,11 @@ function evaluarenvido(envidoH, envidoL)
                     alert("Los "+envidoL+" puntos de Lazarillo le ganan a los "+envidoH+" puntos del jugador")
                     puntosdeljuego[1]+=2;
                 }
-
 }
-
 
 //--------------------------------------------------------------------------------------------------------------------------
 //                                  PARTE 2 CODIFICACION DEL TRUCO
 //--------------------------------------------------------------------------------------------------------------------------
-       
 // FUNCION MOSTRARCARTA() MUESTRA LAS CARTAS QUE EL USUARIO TIENE EN LA MANO, DESCONTANDO LAS QUE ESTAN EN LA MESA
 // FUNCION EVALUAR: COMPARA EL RANGO DE LAS CARTAS PARA SABER QUIEN GANA => ESTA EN ARRAYMANO[CARTA][2]
 
@@ -279,8 +293,8 @@ function truco()
         {
             val=true        //reseteo variable de retorno de funcion
             restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
-            
-//--------------------------
+ 
+            //--------------------------
             //valido apretar menu
             //  while(banderamenu!=true)
             //  {
@@ -364,7 +378,6 @@ function truco()
                                 }
                             }
                             console.log("Primera mano: "+totalmano);
-
                         }
                     }
                     if(mano==2)
@@ -406,9 +419,7 @@ function truco()
                                 alert("LAZARILLO DICE: Estoy de malas...me voy al mazo")
                                 puntosdeljuego[0]+=1
                                 return true
-                                
                             }
-
                         }
                           // ------ USER 0 AL TERMINAR SEGUNDA MANO GANO...LAZARILLO NO GANO NINGNUA DE LAS DOS MANOS  ---------------------      
                         if(totalmano==0)
@@ -512,7 +523,6 @@ function truco()
                                }
                       }
                     }//fin mano 3
-                        
 
                        //EN CUALQUIER MANO SI LAZARILLO LLEGA A DOS YA GANO
                     if(totalmano==2)
@@ -527,7 +537,6 @@ function truco()
                             puntosdeljuego[1]+=1           //si no se canto truco, en pardas user suma un punto
                         }
                         return true
-
                     }
                     else
                     {
@@ -558,7 +567,6 @@ function truco()
       {
         Lazarillotiracarta()
       }
-                 
     }
 
     function Lazarillotiracarta()
@@ -605,7 +613,6 @@ function truco()
                         puntos[4]=true     //marco que se canto truco
                         return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO"); 
                     }
-                    
                 }
                 else
                 {
@@ -624,7 +631,6 @@ function truco()
                         puntos[4]=true     //marco que se canto truco
                         return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO"); 
                     }
-                    
                 }
                 else
                 {
@@ -773,7 +779,7 @@ function truco()
 
 barajar();
 envido();          //la funcion envido actualiza los puntos del juego
-seguirjuego=truco();
+//seguirjuego=truco();
 alert("JUEGO TERMINADO"+'\n\n'+"Puntaje final: "+'\n'+
         "Usuario: "+puntosdeljuego[0]+'\n'+
         "Lazarillo: "+puntosdeljuego[1])
