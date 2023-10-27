@@ -239,8 +239,8 @@ function envido()
             }
             else
             {
-                //CAPACIDAD DE MENTIR Y SALIR A ROBAR PUNTOS DE LAZARILLO AL 25%
-                if((Math.floor(Math.random()*3))<1)
+                //CAPACIDAD DE MENTIR Y SALIR A ROBAR PUNTOS DE LAZARILLO AL 50%
+                if((Math.floor(Math.random()*4))<3)
                 {
                     puntos[0]=true;  //marco que se canto envido
                     if(confirm("LAZARILLO DICE: Cuando vine de La Isla traia un lazo retorcido; con él enlacé dos cartas y con ellas digo ENVIDO."))
