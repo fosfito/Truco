@@ -10,7 +10,7 @@ const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario
     const puntosdeljuego=[0,0];     //puntos de toda la partida ([Humano,Maquina])
 
     //Array que indica que se canto para sumar los puntos
-    //puntos[ENVIDO,envido,real envido, falta envido,TRUCO, retruco, vale 4], usarlo completo en la Update 2.0
+    //puntos[envido,envido,real envido, falta envido,truco, retruco, vale 4]
     const puntos= [false,false,false,false,false,false,false] 
     const ComparadorTruco=[[1,1],[1,1]]   //En este array se guarda la carta de cada uno de cada mano indice 0=Humano 1=Lazarillo
     let seguirjuego=true;  //variable que indica si el juego sigue o se termino
@@ -62,9 +62,9 @@ function barajar()
 
         mostrarresumen();       //muestro resumen de cartas por consola
            
-    /* intento de cargar imagen por js en etiqueta div PREGUNTAR LUCAS
-    --------------------------------------------------------------------------------------
-    //document.getElementById("1").setAttribute("src", "img/3e.png")
+    //intento de cargar imagen por js en etiqueta div PREGUNTAR LUCAS
+    //--------------------------------------------------------------------------------------
+    //***document.getElementsByClassName("Carta1").setAttribute("src", "img/3e.png")
     //document.getElementById("primera").setAttribute("src", "img/3e.png");
 
     // Select the image element using its ID
@@ -72,8 +72,8 @@ function barajar()
 
     // Update the image source
     //image.src = 'img/3e.png';
-    --------------------------------------------------------------------------------------
-    */
+    //--------------------------------------------------------------------------------------
+//    */
 }
 function mostrarresumen()           //muestraresumen de cartas por consola
 {
@@ -90,11 +90,11 @@ function mostrarresumen()           //muestraresumen de cartas por consola
     +arraymano[4][3]+" de "+palo[arraymano[4][4]]+" "+arraymano[4][1]+'\n'
     +arraymano[5][3]+" de "+palo[arraymano[5][4]]+" "+arraymano[5][1]+'\n');
     console.log("========================================================")
+
+
 }
 
-//------------------------------------------------------------------------------------------------------
-//                      FUNCION ENVIDO DEL USUARIO Y DE LA MAQUINA
-//------------------------------------------------------------------------------------------------------
+//FUNCION ENVIDO DEL USUARIO Y DE LA MAQUINA
 function envido()
 {
     let total=0; //Acumulador para los puntos del tanto de cada usuario
@@ -125,25 +125,6 @@ function envido()
             envidohumano=contarpuntos(arraymano[2][3],arraymano[1][3]);
         }
     
-    //Si humano no tiene tantos informa la carta mas alta
-    //el humano tiene las cartas arraymano[0]//arraymano[3]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
-    if((arraymano[0][4]!=arraymano[1][4])&&(arraymano[1][4]!=arraymano[2][4])&&(arraymano[0][4]!=arraymano[2][4]))
-    {
-       // let puntos_unacarta=0;
-        if(arraymano[0][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
-            {
-                envidohumano=arraymano[0][3]
-            }  
-        if((arraymano[1][3]<=7)&&(arraymano[1][3]>envidohumano))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
-            {
-                envidohumano=arraymano[1][3]
-            }
-        if((arraymano[2][3]<=7)&&(arraymano[2][3]>envidohumano))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
-            {
-                envidohumano=arraymano[2][3]
-            }  
-    }
-
     //lazarillo mira cuantos puntos de envido tiene
     if(arraymano[3][4]==arraymano[4][4])            //palo3=palo4
         {
@@ -158,26 +139,8 @@ function envido()
             envidolazarillo=contarpuntos(arraymano[4][3],arraymano[5][3]);
         }
 
-    //Si Lazarillo no tiene tantos halla la carta mas alta para saber los puntos
-    //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NRO_CARTA, PALO_Carta (VALOR (0-3) que trae del arraypalo)]
-    if((arraymano[3][4]!=arraymano[4][4])&&(arraymano[4][4]!=arraymano[5][4])&&(arraymano[3][4]!=arraymano[5][4]))
-    {
-        if(arraymano[3][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
-            {
-                envidolazarillo=arraymano[3][3]
-            }  
-        if((arraymano[4][3]<=7)&&(arraymano[4][3]>envidolazarillo))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
-            {
-                envidolazarillo=arraymano[4][3]
-            }
-        if((arraymano[5][3]<=7)&&(arraymano[5][3]>envidolazarillo))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
-            {
-                envidolazarillo=arraymano[5][3]
-            }  
-    }
-
-    //despues que lazarillo y humano contaron los puntos el humano pregunta por envido
-    if(confirm("Te tocaron "+envidohumano+" puntos"+'\n'+"Queres cantarle ENVIDO?"))
+        //despues que lazarillo y humano contaron los puntos el humano pregunta por envido
+        if(confirm("Te tocaron "+envidohumano+" puntos"+'\n'+"Queres cantarle ENVIDO?"))
     { 
         puntos[0]=true;  //MARCO QUE SE CANTO ENVIDO
 
@@ -191,8 +154,8 @@ function envido()
         }
         else
         {
-            //LAZARILLO EVALUA SI ACEPTA EL ENVIDO
-            if (envidolazarillo>20) 
+        //LAZARILLO EVALUA SI ACEPTA EL ENVIDO
+        if (envidolazarillo>20) 
             {
                 puntos[0]=true;
                 alert("JUGADOR DICE: Envido carajo!"+'\n'+
@@ -204,9 +167,11 @@ function envido()
                 alert("JUGADOR DICE: Envido !"+'\n'+
                 "LAZARILLO RESPONDE: El que huye sirve para otra batalla, NO QUIERO");
                 puntosdeljuego[0]+=1 //suma un punto el usuario
+                
             }
         }
-    }
+        
+     }
 
     //TURNO ENVIDO PC (Lazarillo)
     //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
@@ -235,8 +200,8 @@ function envido()
             }
             else
             {
-                //CAPACIDAD DE MENTIR Y SALIR A ROBAR PUNTOS DE LAZARILLO AL 50%
-                if((Math.floor(Math.random()*4))<3)
+                //CAPACIDAD DE MENTIR Y SALIR A ROBAR PUNTOS DE LAZARILLO AL 25%
+                if((Math.floor(Math.random()*3))<1)
                 {
                     puntos[0]=true;  //marco que se canto envido
                     if(confirm("LAZARILLO DICE: Cuando vine de La Isla traia un lazo retorcido; con él enlacé dos cartas y con ellas digo ENVIDO."))
@@ -257,12 +222,15 @@ function envido()
                         alert("Es muy facil mentirte sin puntos")
                     }
                 }
+
             }
+
         }
     }
     }
     alert("Humano: "+puntosdeljuego[0]+" // Lazarillo: "+puntosdeljuego[1])
- }
+ 
+}
 
 function contarpuntos(valor1,valor2)    // contar puntos del envido
     {
@@ -281,28 +249,29 @@ function contarpuntos(valor1,valor2)    // contar puntos del envido
 function evaluarenvido(envidoH, envidoL)
 {
     if(envidoH>=envidoL)
-    {
-        alert("Los "+envidoH+" puntos del humano son mejores que los "+envidoL+" puntos de lazarillo")
-        puntosdeljuego[0]+=2;
-    }
-    else
-    {
-        alert("Los "+envidoL+" puntos de Lazarillo le ganan a los "+envidoH+" puntos del jugador")
-        puntosdeljuego[1]+=2;
-    }
+                {
+                    alert("Los "+envidoH+" puntos del humano son mejores que los "+envidoL+" puntos de lazarillo")
+                    puntosdeljuego[0]+=2;
+                }
+                else
+                {
+                    alert("Los "+envidoL+" puntos de Lazarillo le ganan a los "+envidoH+" puntos del jugador")
+                    puntosdeljuego[1]+=2;
+                }
+
 }
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 //                                  PARTE 2 CODIFICACION DEL TRUCO
 //--------------------------------------------------------------------------------------------------------------------------
+       
 // FUNCION MOSTRARCARTA() MUESTRA LAS CARTAS QUE EL USUARIO TIENE EN LA MANO, DESCONTANDO LAS QUE ESTAN EN LA MESA
 // FUNCION EVALUAR: COMPARA EL RANGO DE LAS CARTAS PARA SABER QUIEN GANA => ESTA EN ARRAYMANO[CARTA][2]
 
-
 function truco()
     {
-        let totalmano = 0    //si la pc gana +1 //si pc llega a dos gano, sino gano el user
+        let totalmano = 0    //si la pc gana +1 //si pc llegqa a dos gano, sino gano el user
         let lazarillohizoprimera=true       //Almaceno quien hizo primera por si empatan en la tercer ronda
         let val=true;
         let banderamenu=false;
@@ -310,287 +279,247 @@ function truco()
         {
             val=true        //reseteo variable de retorno de funcion
             restantes=mostrarmenu(arraymano[0],arraymano[1],arraymano[2]);  //devuelve el listado de cartas en la mano del jugador
-            cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
+            
 
-//---------------------------   VALIDO TECLAS -----
-            //console.log(cartaAjugar-1);
+            //valido apretar menu
+          //  while(banderamenu!=true)
+          //  {
+           cartaAjugar=prompt("Accion a realizar"+'\n'+restantes+'\n'+"7 = Cantar TRUCO"+'\n\n')
+         //  if((cartaAjugar)
+         //   }
+            console.log(cartaAjugar-1);
             if((cartaAjugar=="7"))     
-            {
-                if(puntos[4]==false)     //si el user canta truco y no se canto aun, lo hace
                 {
-                    val=RtaIATruco();     //Lazarillo evalua si ACEPTA el truco
-                    if(val==false)
+                    if(puntos[4]==false)     //si el user canta truco y no se canto aun, lo hace
                     {
-                        puntosdeljuego[0]+=1; //Si Lazarillo rechaza el truco sumo un punto de truco no querido
-                        return true
-                    }
-                }
-                else                //si apreta 7 y el user canto truco cuando ya estaba jugado, lazarillo le advierte
-                {
-                alert("LAZARILLO DICE: Paisano, el nombre del juego ya esta cantado, presta mas atencion")
-                mano--
-                }
-            }
-            else
-            {
-                if ((cartaAjugar=="1")||(cartaAjugar=="2")||(cartaAjugar=="3")||(cartaAjugar=="7")) 
-                {
-                    if ((cartaAjugar=="1")&&(arraymano[0][1]==false)) 
-                    {
-                        alert("LAZARILLO DICE: Paisano, la carta ya la jugaste!") 
-                        mano--;   
-                    }
-                    else
-                    {
-                        if ((cartaAjugar=="2")&&(arraymano[1][1]==false)) 
+                        val=RtaIATruco();     //Lazarillo evalua si ACEPTA el truco
+                        if(val==false)
                         {
-                            alert("LAZARILLO DICE: Esa carta ya la tiraste, no seas cabrón")
-                            mano--;    
+                            puntosdeljuego[0]+=1; //Si Lazarillo rechaza el truco sumo un punto de truco no querido
+                            return true
+                        }
+                    }
+                    else                //si apreta 7 y el user canto truco cuando ya estaba jugado, lazarillo le advierte
+                    {
+                        alert("LAZARILLO DICE: Paisano, el nombre del juego ya esta cantado, presta mas atencion")
+                        mano--
+                    }
+                }
+                else
+                {
+                  alert("La carta que jugaste es...: "+arraymano[cartaAjugar-1][3]+" de "+palo[arraymano[cartaAjugar-1][4]])
+                  ComparadorTruco[0]=arraymano[cartaAjugar-1]
+                  arraymano[cartaAjugar-1][1]=false  //La carta se puso en la mesa
+                  seguirjuego=jugarLazarillo();     //A Lazarillo le toca jugar una carta
+                 
+                  if(seguirjuego==false)      //si el usuario no quiere truco, termina el juego
+                  {
+                    return seguirjuego
+                  }
+                 
+                  //Si mano=1 sumo quien gano o me fijo si es parda
+                  if(mano==1)
+                    {
+                        if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
+                        { 
+                                alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                                ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
                         }
                         else
                         {
-                        if ((cartaAjugar=="3")&&(arraymano[2][1]==false)) 
-                            {
-                                alert("LAZARILLO DICE: ¿ENSERIO?, Ya tiraste esa carta!! mirá bien lo que haces!!")
-                                mano--;    
-                            }
+                            if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
+                            { 
+                                alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
+                                ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
+                                totalmano+=1          //gano lazarillo sumo 1 
+                            } 
                             else
+                            { 
+                                if(ComparadorTruco[1][2]<ComparadorTruco[0][2])   //si la carta del usuario le gana a Lazarillo
+                                { 
+                                    alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                                    ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
+                                    
+                                } 
+                                else
+                                {
+                                    alert("Parda en primera, la proxima mano gana la partida!")
+                                    totalmano=555;
+                                }
+                            }
+                            console.log("Primera mano: "+totalmano);
+
+                        }
+                    }
+                    if(mano==2)
+                    {
+                        if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
+                        { 
+                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                        ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
+
+                        if (totalmano==555)   //verifico si vengo de parda desde la primer mano
                             {
-                                //cartas permitidas aca
-                                alert("La carta que jugaste es...: "+arraymano[cartaAjugar-1][3]+" de "+palo[arraymano[cartaAjugar-1][4]])
-                                ComparadorTruco[0]=arraymano[cartaAjugar-1]
-                                arraymano[cartaAjugar-1][1]=false  //La carta se puso en la mesa
-                                seguirjuego=jugarLazarillo();     //A Lazarillo le toca jugar una carta
-                                
-                                if(seguirjuego==false)      //si el usuario no quiere truco, termina el juego
-                                    {
-                                        return seguirjuego
-                                    }
-                                 
-                                //Si mano=1 sumo quien gano o me fijo si es parda
-                                if(mano==1)
+                                alert("LAZARILLO DICE: Me ganaste la partida, solo te estoy midiendo...") 
+                                if(puntos[4]==true)
                                 {
-                                    if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
-                                    { 
-                                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
-                                        ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
-                                    }
-                                    else
-                                    {
-                                        if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
-                                        { 
-                                            alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
-                                            ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
-                                            totalmano+=1          //gano lazarillo sumo 1 
-                                        } 
-                                        else
-                                        { 
-                                            if(ComparadorTruco[1][2]<ComparadorTruco[0][2])   //si la carta del usuario le gana a Lazarillo
-                                            { 
-                                                alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
-                                                ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
-                                            } 
-                                            else
-                                            {
-                                                alert("Parda en primera, la proxima mano gana la partida!")
-                                                totalmano=555;
-                                            }
-                                        }
-                                        console.log("Primera mano: "+totalmano);
-                                    }
-                                }
-                                
-                                if(mano==2)
-                                {
-                                    if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
-                                    { 
-                                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
-                                        ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
-                    
-                                        if (totalmano==555)   //verifico si vengo de parda desde la primer mano
-                                        {
-                                            alert("LAZARILLO DICE: Me ganaste la partida, solo te estoy midiendo...") 
-                                            if(puntos[4]==true)
-                                            {
-                                                puntosdeljuego[0]+=2           //Si se canto truco en pardas USER gana 2 puntos
-                                            }
-                                            else
-                                            {
-                                                puntosdeljuego[0]+=1           //si no se canto truco, en pardas user suma un punto
-                                            }
-                                            return seguirjuego=false
-                                        }//---------------
-                                    }
-                                    else
-                                    {   //Lazarillo le gana en la segunda mano
-                                       if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
-                                       { 
-                                            alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
-                                            ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
-                                            if (totalmano==555)     //si es parda de la mano anterior esta define todo
-                                            {
-                                                console.log("LAZARILLO DICE: La vida es justa...te gané el truco sin esfuerzo!")
-                                            }
-                                            totalmano+=1          //gano lazarillo sumo 1 
-                                        } 
-                                        else
-                                        { 
-                                            if(ComparadorTruco[1][2]==ComparadorTruco[0][2])   
-                                            alert("LAZARILLO DICE: Estoy de malas...me voy al mazo")
-                                            puntosdeljuego[0]+=1
-                                            return true
-                                        }
-                                    }
-                                    // ------ USER 0 AL TERMINAR SEGUNDA MANO GANO...LAZARILLO NO GANO NINGNUA DE LAS DOS MANOS  ---------------------      
-                                    /*
-                                    if(totalmano==0)
-                                    {
-                                        console.log("Mano error?: "+mano);
-                                        alert("Lazarillo dice: Has ganado....A veces cuando pierdo, aprendo")
-                                        if(puntos[4]==true)
-                                        {
-                                            puntosdeljuego[0]+=2           //Si se canto truco USER gana 2 puntos
-                                        }
-                                        else
-                                        {
-                                            puntosdeljuego[0]+=1           //si no se canto truco,user suma un punto
-                                        }
-                                        console.log("Puntos ganados por user:"+puntosdeljuego[0]);
-                                        return true
-                                    }
-                                    */
-                                }//fin mano 2
-                
-                                //mano 3
-                                if(mano==3)
-                                {    if((totalmano==0)&&(mano==3))
-                                    {
-                                        console.log("Mano error?: "+mano);
-                                        alert("Lazarillo dice: Has ganado....A veces cuando pierdo, aprendo")
-                                        if(puntos[4]==true)
-                                        {
-                                            puntosdeljuego[0]+=2           //Si se canto truco USER gana 2 puntos
-                                        }
-                                        else
-                                        {
-                                            puntosdeljuego[0]+=1           //si no se canto truco,user suma un punto
-                                        }
-                                        console.log("Puntos ganados por user:"+puntosdeljuego[0]);
-                                        return true
-                                    }
-                                    if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
-                                    { 
-                                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
-                                        ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo ☺")
-                                        if(totalmano>=2)
-                                        {
-                                            alert("LAZARILLO DICE: Me ganaste de una manera muy lastimosa.")
-                                            if(puntos[4]==true)
-                                            {
-                                                puntosdeljuego[0]+=2           //Si se canto truco Lazarillo gana 2 puntos
-                                            }
-                                            else
-                                            {
-                                                puntosdeljuego[0]+=1           //si no se canto truco, Lazarillo suma un punto
-                                            }
-                                            return true
-                                        }
-                                        else
-                                        {
-                                            alert("LAZARILLO DICE: Me ganaste el juego...QUERÍA PROBAR TU NIVEL, NO ESTABA JUGANDO EN SERIO.")
-                                            if(puntos[4]==true)
-                                            {
-                                                puntosdeljuego[0]+=2           //Si se canto truco Lazarillo gana 2 puntos
-                                            }
-                                            else
-                                            {
-                                                puntosdeljuego[0]+=1           //si no se canto truco, Lazarillo suma un punto
-                                            }
-                                            return true 
-                                        }
-                                    }
-                                    if(ComparadorTruco[0][2]==ComparadorTruco[1][2])   //si Lazarillo gana la tercera mano
-                                    { 
-                                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, el igual al"+'\n'+
-                                        ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
-                                        if(lazarillohizoprimera==false)
-                                        {
-                                            alert("LAZARILLO DICE: Me ganaste por haber hecho primera")     
-                                            if(puntos[4]==true)
-                                            {
-                                            puntosdeljuego[0]+=2           //Si se canto truco Lazarillo gana 2 puntos
-                                            }
-                                            else
-                                            {
-                                            puntosdeljuego[0]+=1           //si no se canto truco, Lazarillo suma un punto
-                                            }
-                                            return true
-                                        }
-                                        else
-                                        {
-                                            alert("LAZARILLO DICE: Te gane y te gozo por haber hecho primera")     
-                                            if(puntos[4]==true)
-                                            {
-                                                puntosdeljuego[1]+=2           //Si se canto truco Lazarillo gana 2 puntos
-                                            }
-                                            else
-                                            {
-                                                puntosdeljuego[1]+=1           //si no se canto truco, Lazarillo suma un punto
-                                            }
-                                            return true
-                                        }
-                                    }
-                                    if(ComparadorTruco[0][2]<ComparadorTruco[1][2])   //si la carta del usuario es igual
-                                    { 
-                                        alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gana al"+'\n'+
-                                        ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
-                                        if(totalmano>=1)
-                                        {
-                                            alert("LAZARILLO DICE: Te gane la partida...Tú lo llamas locura, yo lo llamo ganar.")
-                                            if(puntos[4]==true)
-                                            {
-                                                puntosdeljuego[1]+=2           //Si se canto truco Lazarillo gana 2 puntos
-                                            }
-                                            else
-                                            {
-                                                puntosdeljuego[1]+=1           //si no se canto truco, Lazarillo suma un punto
-                                            }
-                                            return true
-                                        }
-                                    }
-                                }
-                                //fin mano 3
-                                //EN CUALQUIER MANO SI LAZARILLO LLEGA A DOS YA GANO
-                                if(totalmano==2)
-                                {
-                                    alert("Lazarillo dice: Perdiste, no te desanimes...Ganancia inocente, no la verás fácilmente.")
-                                    if(puntos[4]==true)
-                                    {
-                                        puntosdeljuego[1]+=2           //Si se canto truco en pardas USER gana 2 puntos
-                                    }
-                                    else
-                                    {
-                                        puntosdeljuego[1]+=1           //si no se canto truco, en pardas user suma un punto
-                                    }
-                                    return true
+                                puntosdeljuego[0]+=2           //Si se canto truco en pardas USER gana 2 puntos
                                 }
                                 else
                                 {
-                                       
+                                puntosdeljuego[0]+=1           //si no se canto truco, en pardas user suma un punto
                                 }
-                                console.log("Mano: "+mano+"- Puntos de Lazarillo: "+totalmano);        //muestro los puntos de la pc
-                                mostrarresumen()          //muestro resumen de la partida en consola para control
+                                return seguirjuego=false
+                            }//---------------
+                        }
+                        else
+                        {   //Lazarillo le gana en la segunda mano
+                            if(ComparadorTruco[1][2]>ComparadorTruco[0][2])   //si la carta de Lazarillo le gana al usuario
+                            { 
+                                alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gano al"+'\n'+
+                                ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
+                                if (totalmano==555)     //si es parda de la mano anterior esta define todo
+                                {
+                                    console.log("LAZARILLO DICE: La vida es justa...te gané el truco sin esfuerzo!")
+                                }
+                                totalmano+=1          //gano lazarillo sumo 1 
+                            } 
+                            else
+                            { 
+                                if(ComparadorTruco[1][2]==ComparadorTruco[0][2])   
+                                alert("LAZARILLO DICE: Estoy de malas...me voy al mazo")
+                                puntosdeljuego[0]+=1
+                                return true
+                                
                             }
-                        }  
-                    }
 
-                }   //fin si la tecla es ok juega
-                else 
-                {
-                    alert("OPCION NO VALIDA")
-                    mano--
+                        }
+                          // ------ USER 0 AL TERMINAR SEGUNDA MANO GANO...LAZARILLO NO GANO NINGNUA DE LAS DOS MANOS  ---------------------      
+                        if(totalmano==0)
+                        {
+                            console.log("Mano error?: "+mano);
+                            alert("Lazarillo dice: Has ganado....A veces cuando pierdo, aprendo")
+                            if(puntos[4]==true)
+                            {
+                                puntosdeljuego[0]+=2           //Si se canto truco USER gana 2 puntos
+                            }
+                            else
+                            {
+                                puntosdeljuego[0]+=1           //si no se canto truco,user suma un punto
+                            }
+                            console.log("Puntos ganados por user:"+puntosdeljuego[0]);
+                            return true
+                        }
+                    }//fin mano 2
+
+                    //mano 3
+                    if(mano==3)
+                    {
+                        if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
+                        { 
+                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, le gano al"+'\n'+
+                        ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo ☺")
+                                if(totalmano>=2)
+                                {
+                                alert("LAZARILLO DICE: Me ganaste de una manera muy lastimosa.")
+                                if(puntos[4]==true)
+                                   {
+                                    puntosdeljuego[0]+=2           //Si se canto truco Lazarillo gana 2 puntos
+                                   }
+                                    else
+                                   {
+                                    puntosdeljuego[0]+=1           //si no se canto truco, Lazarillo suma un punto
+                                   }
+                                   return true
+                                }
+                                else
+                                {
+                                    alert("LAZARILLO DICE: Me ganaste el juego...QUERÍA PROBAR TU NIVEL, NO ESTABA JUGANDO EN SERIO.")
+                                    if(puntos[4]==true)
+                                       {
+                                        puntosdeljuego[0]+=2           //Si se canto truco Lazarillo gana 2 puntos
+                                       }
+                                        else
+                                       {
+                                        puntosdeljuego[0]+=1           //si no se canto truco, Lazarillo suma un punto
+                                       }
+                                    return true 
+                                }
+                        }
+                        if(ComparadorTruco[0][2]==ComparadorTruco[1][2])   //si Lazarillo gana la tercera mano
+                        { 
+                        alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario, el igual al"+'\n'+
+                        ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo")
+                                if(lazarillohizoprimera==false)
+                                {
+                                alert("LAZARILLO DICE: Me ganaste por haber hecho primera")     
+                                if(puntos[4]==true)
+                                   {
+                                    puntosdeljuego[0]+=2           //Si se canto truco Lazarillo gana 2 puntos
+                                   }
+                                    else
+                                   {
+                                    puntosdeljuego[0]+=1           //si no se canto truco, Lazarillo suma un punto
+                                   }
+                                   return true
+                                }
+                                else
+                                {
+                                    alert("LAZARILLO DICE: Te gane y te gozo por haber hecho primera")     
+                                    if(puntos[4]==true)
+                                       {
+                                        puntosdeljuego[1]+=2           //Si se canto truco Lazarillo gana 2 puntos
+                                       }
+                                        else
+                                       {
+                                        puntosdeljuego[1]+=1           //si no se canto truco, Lazarillo suma un punto
+                                       }
+                                       return true
+                                }
+                       }
+                       if(ComparadorTruco[0][2]<ComparadorTruco[1][2])   //si la carta del usuario es igual
+                       { 
+                       alert("El "+ComparadorTruco[1][3]+" de "+palo[ComparadorTruco[1][4]]+" de Lazarillo, le gana al"+'\n'+
+                       ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" del usuario")
+                               if(totalmano>=1)
+                               {
+                                alert("LAZARILLO DICE: Te gane la partida...Tú lo llamas locura, yo lo llamo ganar.")
+                               if(puntos[4]==true)
+                                  {
+                                   puntosdeljuego[1]+=2           //Si se canto truco Lazarillo gana 2 puntos
+                                  }
+                                   else
+                                  {
+                                   puntosdeljuego[1]+=1           //si no se canto truco, Lazarillo suma un punto
+                                  }
+                                  return true
+                               }
+                      }
+                    }//fin mano 3
+                        
+
+                       //EN CUALQUIER MANO SI LAZARILLO LLEGA A DOS YA GANO
+                    if(totalmano==2)
+                    {
+                        alert("Lazarillo dice: Perdiste, no te desanimes...Ganancia inocente, no la verás fácilmente.")
+                        if(puntos[4]==true)
+                        {
+                            puntosdeljuego[1]+=2           //Si se canto truco en pardas USER gana 2 puntos
+                        }
+                        else
+                        {
+                            puntosdeljuego[1]+=1           //si no se canto truco, en pardas user suma un punto
+                        }
+                        return true
+
+                    }
+                    else
+                    {
+                       
+                    }
+                 console.log("Mano: "+mano+"- Puntos de Lazarillo: "+totalmano);        //muestro los puntos de la pc
+                 mostrarresumen()          //muestro resumen de la partida en consola para control
                 }
-            }
         }
         return true
     }
@@ -613,6 +542,7 @@ function truco()
       {
         Lazarillotiracarta()
       }
+                 
     }
 
     function Lazarillotiracarta()
@@ -659,6 +589,7 @@ function truco()
                         puntos[4]=true     //marco que se canto truco
                         return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO"); 
                     }
+                    
                 }
                 else
                 {
@@ -677,6 +608,7 @@ function truco()
                         puntos[4]=true     //marco que se canto truco
                         return confirm("LAZARILLO DICE: Con las cartas que yo tengo tampoco me asusta el cuco y si es que no me detengo, YO LE DIGO TRUCO"); 
                     }
+                    
                 }
                 else
                 {
@@ -798,21 +730,22 @@ function truco()
                     }
                 }
     }
- 
+
+   
     function mostrarmenu(carta1,carta2,carta3)
     {
         let mensaje="";
         if(carta1[1]==true)
             {
-                mensaje+="1 = Tirar "+carta1[3]+" de "+palo[carta1[4]]+'\n'
+            mensaje+="1 = Tirar "+carta1[3]+" de "+palo[carta1[4]]+'\n'
             }
         if(carta2[1]==true)
             {
-                mensaje+="2 = Tirar "+carta2[3]+" de "+palo[carta2[4]]+'\n'
+            mensaje+="2 = Tirar "+carta2[3]+" de "+palo[carta2[4]]+'\n'
             }
             if(carta3[1]==true)
             {
-                mensaje+="3 = Tirar "+carta3[3]+" de "+palo[carta3[4]]+'\n'
+            mensaje+="3 = Tirar "+carta3[3]+" de "+palo[carta3[4]]+'\n'
             }
             return mensaje
     
