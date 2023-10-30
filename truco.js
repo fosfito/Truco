@@ -76,7 +76,7 @@ function barajar()
 function mostrarresumen()           //muestraresumen de cartas por consola
 {
     //Resumen de la partida
-    console.log("========================================================")
+    console.log("=====================================================")
     console.log("A "+Nombre_Jugador+" le tocó: "+'\n'                                  //nro de carta + palo + si fue jugada
     +arraymano[0][3]+" de "+palo[arraymano[0][4]]+" "+arraymano[0][1]+'\n'  
     +arraymano[1][3]+" de "+palo[arraymano[1][4]]+" "+arraymano[1][1]+'\n'
@@ -85,7 +85,7 @@ function mostrarresumen()           //muestraresumen de cartas por consola
     +arraymano[3][3]+" de "+palo[arraymano[3][4]]+" "+arraymano[3][1]+'\n'
     +arraymano[4][3]+" de "+palo[arraymano[4][4]]+" "+arraymano[4][1]+'\n'
     +arraymano[5][3]+" de "+palo[arraymano[5][4]]+" "+arraymano[5][1]+'\n');
-    console.log("========================================================")
+    console.log("=====================================================")
 }
 
 //------------------------------------------------------------------------------------------------------
