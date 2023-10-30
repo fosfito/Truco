@@ -1,2 +1,4 @@
 # Truco
-Tp  de programacion en elaboracion FASE BETA SIN TERMINAR
+Tp  de programacion I en elaboracion FASE ALPHA.
+ISFD 166
+AÑO: 2023
