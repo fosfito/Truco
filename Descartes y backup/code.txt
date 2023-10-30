@@ -1,3 +1,0 @@
--En Javascript podemos añadir una imagen a un div existente de la siguiente forma:
-
- document.getElementById("ID_del_div").innerHTML='<img src="./direccion_imagen.jpg" />';
