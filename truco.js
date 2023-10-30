@@ -1,4 +1,4 @@
-
+//Programa creado por Pablo Rodriguez para la materia Programacion I ** ISFD No 166 ** Año 2023 **
 //declaracion de variables globales
 const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario y 3 para la maquina
     let cartaAjugar="";
@@ -8,14 +8,12 @@ const arraymano=[]  //array que contendra 6 cartas de la mano, 3 para el usuario
     //              0       1       2       3
     let cartaalazar="";
     const puntosdeljuego=[0,0];     //puntos de toda la partida ([Humano,Maquina])
-
     //Array que indica que se canto para sumar los puntos
     //puntos[ENVIDO,envido,real envido, falta envido,TRUCO, retruco, vale 4], usarlo completo en la Update 2.0
     const puntos= [false,false,false,false,false,false,false] 
     const ComparadorTruco=[[1,1],[1,1]]   //En este array se guarda la carta de cada uno de cada mano indice 0=Humano 1=Lazarillo
     let seguirjuego=true;  //variable que indica si el juego sigue o se termino
     let Nombre_Jugador
-
 
 //declaracion de funciones
 function barajar()
@@ -37,7 +35,7 @@ function barajar()
                     [true,true,0,4,0],[true,true,0,4,1],[true,true,0,4,2],[true,true,0,4,3] //40 cartas
     ]
 
-     //selecciono una carta al azar
+    //selecciono una carta al azar
     cartaalazar=Math.floor(Math.random()*40);
 
     //Copio la carta generada al azar a un arraypartida (Es el que tendra esa mano)
@@ -61,7 +59,7 @@ function barajar()
             }
         }
 
-        mostrarresumen();       //muestro resumen de cartas por consola
+    mostrarresumen();       //muestro resumen de cartas por consola
            
     /* intento de cargar imagen por js en etiqueta div PREGUNTAR LUCAS
     --------------------------------------------------------------------------------------
@@ -73,8 +71,7 @@ function barajar()
 
     // Update the image source
     //image.src = 'img/3e.png';
-    --------------------------------------------------------------------------------------
-    */
+    --------------------------------------------------------------------------------------*/
 }
 function mostrarresumen()           //muestraresumen de cartas por consola
 {
@@ -126,144 +123,144 @@ function envido()
             envidohumano=contarpuntos(arraymano[2][3],arraymano[1][3]);
         }
     
-    //Si humano no tiene tantos informa la carta mas alta
-    //el humano tiene las cartas arraymano[0]//arraymano[3]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
-    if((arraymano[0][4]!=arraymano[1][4])&&(arraymano[1][4]!=arraymano[2][4])&&(arraymano[0][4]!=arraymano[2][4]))
-    {
-       // let puntos_unacarta=0;
-        if(arraymano[0][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
+        //Si humano no tiene tantos informa la carta mas alta
+        //el humano tiene las cartas arraymano[0]//arraymano[3]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
+        if((arraymano[0][4]!=arraymano[1][4])&&(arraymano[1][4]!=arraymano[2][4])&&(arraymano[0][4]!=arraymano[2][4]))
+        {
+        // let puntos_unacarta=0;
+            if(arraymano[0][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
+                {
+                    envidohumano=arraymano[0][3]
+                }  
+            if((arraymano[1][3]<=7)&&(arraymano[1][3]>envidohumano))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+                {
+                    envidohumano=arraymano[1][3]
+                }
+            if((arraymano[2][3]<=7)&&(arraymano[2][3]>envidohumano))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+                {
+                    envidohumano=arraymano[2][3]
+                }  
+        }
+
+        //lazarillo mira cuantos puntos de envido tiene
+        if(arraymano[3][4]==arraymano[4][4])            //palo3=palo4
             {
-                envidohumano=arraymano[0][3]
-            }  
-        if((arraymano[1][3]<=7)&&(arraymano[1][3]>envidohumano))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
-            {
-                envidohumano=arraymano[1][3]
+                envidolazarillo=contarpuntos(arraymano[3][3],arraymano[4][3]);
             }
-        if((arraymano[2][3]<=7)&&(arraymano[2][3]>envidohumano))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+        if(arraymano[3][4]==arraymano[5][4])            //palo3=palo5
             {
-                envidohumano=arraymano[2][3]
-            }  
-    }
-
-    //lazarillo mira cuantos puntos de envido tiene
-    if(arraymano[3][4]==arraymano[4][4])            //palo3=palo4
-        {
-            envidolazarillo=contarpuntos(arraymano[3][3],arraymano[4][3]);
-        }
-    if(arraymano[3][4]==arraymano[5][4])            //palo3=palo5
-        {
-            envidolazarillo=contarpuntos(arraymano[3][3],arraymano[5][3]);
-        }
-    if(arraymano[4][4]==arraymano[5][4])            //palo4=palo5
-        {
-            envidolazarillo=contarpuntos(arraymano[4][3],arraymano[5][3]);
-        }
-
-    //Si Lazarillo no tiene tantos halla la carta mas alta para saber los puntos
-    //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NRO_CARTA, PALO_Carta (VALOR (0-3) que trae del arraypalo)]
-    if((arraymano[3][4]!=arraymano[4][4])&&(arraymano[4][4]!=arraymano[5][4])&&(arraymano[3][4]!=arraymano[5][4]))
-    {
-        if(arraymano[3][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
-            {
-                envidolazarillo=arraymano[3][3]
-            }  
-        if((arraymano[4][3]<=7)&&(arraymano[4][3]>envidolazarillo))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
-            {
-                envidolazarillo=arraymano[4][3]
+                envidolazarillo=contarpuntos(arraymano[3][3],arraymano[5][3]);
             }
-        if((arraymano[5][3]<=7)&&(arraymano[5][3]>envidolazarillo))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+        if(arraymano[4][4]==arraymano[5][4])            //palo4=palo5
             {
-                envidolazarillo=arraymano[5][3]
-            }  
-    }
+                envidolazarillo=contarpuntos(arraymano[4][3],arraymano[5][3]);
+            }
 
-    //despues que lazarillo y humano contaron los puntos el humano pregunta por envido
-    if(confirm("Te tocaron "+envidohumano+" puntos"+'\n'+"Queres cantarle ENVIDO?"))
-    { 
-        puntos[0]=true;  //MARCO QUE SE CANTO ENVIDO
-
-        //LAZARILLO MIRA SI TIENE FLOR
-        if((arraymano[3][4]==arraymano[4][4])&&(arraymano[4][4]==arraymano[5][4]))
+        //Si Lazarillo no tiene tantos halla la carta mas alta para saber los puntos
+        //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NRO_CARTA, PALO_Carta (VALOR (0-3) que trae del arraypalo)]
+        if((arraymano[3][4]!=arraymano[4][4])&&(arraymano[4][4]!=arraymano[5][4])&&(arraymano[3][4]!=arraymano[5][4]))
         {
-            alert("JUGADOR DICE: Envido!"+'\n'+
-                  "LAZARILLO CANTA SOCARRON: Viniendo de chascomus en una lancha a vapor casi me caigo al agua por agarrar esta flor");
-            puntos[0]=true;
-            puntosdeljuego[1]+=3 //suma tres puntos lazarillo por flor
+            if(arraymano[3][3]<=7)          //si la carta1 <= 7 es el nuevo maximo
+                {
+                    envidolazarillo=arraymano[3][3]
+                }  
+            if((arraymano[4][3]<=7)&&(arraymano[4][3]>envidolazarillo))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+                {
+                    envidolazarillo=arraymano[4][3]
+                }
+            if((arraymano[5][3]<=7)&&(arraymano[5][3]>envidolazarillo))   //si la carta1 <= 7 y mayor a la almacenada => es el nuevo maximo
+                {
+                    envidolazarillo=arraymano[5][3]
+                }  
         }
-        else
-        {
-            //LAZARILLO EVALUA SI ACEPTA EL ENVIDO
-            if (envidolazarillo>20) 
+
+        //despues que lazarillo y humano contaron los puntos el humano pregunta por envido
+        if(confirm("Te tocaron "+envidohumano+" puntos"+'\n'+"Queres cantarle ENVIDO?"))
+        { 
+            puntos[0]=true;  //MARCO QUE SE CANTO ENVIDO
+
+            //LAZARILLO MIRA SI TIENE FLOR
+            if((arraymano[3][4]==arraymano[4][4])&&(arraymano[4][4]==arraymano[5][4]))
             {
+                alert("JUGADOR DICE: Envido!"+'\n'+
+                    "LAZARILLO CANTA SOCARRON: Viniendo de chascomus en una lancha a vapor casi me caigo al agua por agarrar esta flor");
                 puntos[0]=true;
-                alert("JUGADOR DICE: Envido carajo!"+'\n'+
-                "LAZARILLO RESPONDE: Quiero a tu envido!")
-                evaluarenvido(envidohumano, envidolazarillo)
+                puntosdeljuego[1]+=3 //suma tres puntos lazarillo por flor
             }
             else
-            {   
-                alert("JUGADOR DICE: Envido !"+'\n'+
-                "LAZARILLO RESPONDE: El que huye sirve para otra batalla, NO QUIERO");
-                puntosdeljuego[0]+=1 //suma un punto el usuario
-            }
-        }
-    }
-
-    //TURNO ENVIDO PC (Lazarillo)
-    //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
-    if(puntos[0]==false)
-    { //si el usuario no canto envido, lazarillo revisa si tiene puntos
-        if((arraymano[3][4]==arraymano[4][4])&&(arraymano[4][4]==arraymano[5][4]))
-        {
-            alert("LAZARILLO CANTA: Cómo lágrimas de olvido como suspiros de amor, cantaba sus grandes penas un pájaro en una FLOR.");
-            puntos[0]=true;
-            puntosdeljuego[1]+=3 //suma tres puntos lazarillo por flor
-        }
-        else
-        {
-            if (envidolazarillo>=20) 
             {
-                puntos[0]=true;  //marco que se canto envido
-                if(confirm("LAZARILLO DICE: Cuando vine de La Isla traia un lazo retorcido; con él enlacé dos cartas y con ellas digo ENVIDO."))
+                //LAZARILLO EVALUA SI ACEPTA EL ENVIDO
+                if (envidolazarillo>20) 
                 {
+                    puntos[0]=true;
+                    alert("JUGADOR DICE: Envido carajo!"+'\n'+
+                    "LAZARILLO RESPONDE: Quiero a tu envido!")
                     evaluarenvido(envidohumano, envidolazarillo)
-
                 }
                 else
-                {
-                    puntosdeljuego[1]+=1 //suma 1 puntos Lazarillo por envido no querido
+                {   
+                    alert("JUGADOR DICE: Envido !"+'\n'+
+                    "LAZARILLO RESPONDE: El que huye sirve para otra batalla, NO QUIERO");
+                    puntosdeljuego[0]+=1 //suma un punto el usuario
                 }
+            }
+        }
+
+        //TURNO ENVIDO PC (Lazarillo)
+        //Lazarillo tiene las cartas arraymano[3] hasta arraymano[5]  [FLAG 1, FLAG2, ESCALA , NUMERO DE CARTA, PALO DE LA CARTA(VALOR (0-3) QUE PEGA AL ARRAY PALO)]
+        if(puntos[0]==false)
+        { //si el usuario no canto envido, lazarillo revisa si tiene puntos
+            if((arraymano[3][4]==arraymano[4][4])&&(arraymano[4][4]==arraymano[5][4]))
+            {
+                alert("LAZARILLO CANTA: Cómo lágrimas de olvido como suspiros de amor, cantaba sus grandes penas un pájaro en una FLOR.");
+                puntos[0]=true;
+                puntosdeljuego[1]+=3 //suma tres puntos lazarillo por flor
             }
             else
             {
-                //CAPACIDAD DE MENTIR Y SALIR A ROBAR PUNTOS DE LAZARILLO AL 50%
-                if((Math.floor(Math.random()*4))<3)
+                if (envidolazarillo>=20) 
                 {
                     puntos[0]=true;  //marco que se canto envido
                     if(confirm("LAZARILLO DICE: Cuando vine de La Isla traia un lazo retorcido; con él enlacé dos cartas y con ellas digo ENVIDO."))
                     {
                         evaluarenvido(envidohumano, envidolazarillo)
-                        if (puntosdeljuego[1]==2)                   //Lazarillo se burla del usuario despues de mentirle
-                        {
-                            alert("LAZARILLO SONRIE: Sos muy facil "+Nombre_Jugador+" te miento sin tantos")
-                        }
-                        if (puntosdeljuego[0]==2)                   //Lazarillo reconoce que miente y pierde
-                        {
-                            alert("Me agarraste!, la mentira tiene patas cortas")
-                        }
+
                     }
                     else
                     {
                         puntosdeljuego[1]+=1 //suma 1 puntos Lazarillo por envido no querido
-                        alert("Es muy facil mentirte sin puntos")
+                    }
+                }
+                else
+                {
+                    //CAPACIDAD DE MENTIR Y SALIR A ROBAR PUNTOS DE LAZARILLO AL 50%
+                    if((Math.floor(Math.random()*4))<3)
+                    {
+                        puntos[0]=true;  //marco que se canto envido
+                        if(confirm("LAZARILLO DICE: Cuando vine de La Isla traia un lazo retorcido; con él enlacé dos cartas y con ellas digo ENVIDO."))
+                        {
+                            evaluarenvido(envidohumano, envidolazarillo)
+                            if (puntosdeljuego[1]==2)                   //Lazarillo se burla del usuario despues de mentirle
+                            {
+                                alert("LAZARILLO SONRIE: Sos muy facil "+Nombre_Jugador+" te miento sin tantos")
+                            }
+                            if (puntosdeljuego[0]==2)                   //Lazarillo reconoce que miente y pierde
+                            {
+                                alert("Me agarraste!, la mentira tiene patas cortas")
+                            }
+                        }
+                        else
+                        {
+                            puntosdeljuego[1]+=1 //suma 1 puntos Lazarillo por envido no querido
+                            alert("Es muy facil mentirte sin puntos")
+                        }
                     }
                 }
             }
         }
     }
-    }
-    alert("Humano: "+puntosdeljuego[0]+" // Lazarillo: "+puntosdeljuego[1])
- }
+alert(Nombre_Jugador+": "+puntosdeljuego[0]+" // Lazarillo: "+puntosdeljuego[1])
+}
 
 function contarpuntos(valor1,valor2)    // contar puntos del envido
     {
@@ -293,13 +290,11 @@ function evaluarenvido(envidoH, envidoL)
     }
 }
 
-
 //--------------------------------------------------------------------------------------------------------------------------
 //                                  PARTE 2 CODIFICACION DEL TRUCO
 //--------------------------------------------------------------------------------------------------------------------------
 // FUNCION MOSTRARCARTA() MUESTRA LAS CARTAS QUE EL USUARIO TIENE EN LA MANO, DESCONTANDO LAS QUE ESTAN EN LA MESA
 // FUNCION EVALUAR: COMPARA EL RANGO DE LAS CARTAS PARA SABER QUIEN GANA => ESTA EN ARRAYMANO[CARTA][2]
-
 
 function truco()
     {
@@ -520,24 +515,6 @@ function truco()
                                             return true
                                         }
                                     }
-                                    // ------ USER 0 AL TERMINAR SEGUNDA MANO GANO...LAZARILLO NO GANO NINGNUA DE LAS DOS MANOS  ---------------------      
-                                    /*
-                                    if(totalmano==0)
-                                    {
-                                        console.log("Mano error?: "+mano);
-                                        alert("Lazarillo dice: Has ganado....A veces cuando pierdo, aprendo")
-                                        if(puntos[4]==true)
-                                        {
-                                            puntosdeljuego[0]+=2           //Si se canto truco USER gana 2 puntos
-                                        }
-                                        else
-                                        {
-                                            puntosdeljuego[0]+=1           //si no se canto truco,user suma un punto
-                                        }
-                                        console.log("Puntos ganados por user:"+puntosdeljuego[0]);
-                                        return true
-                                    }
-                                    */
                                 }//fin mano 2
                 
                                 //mano 3
