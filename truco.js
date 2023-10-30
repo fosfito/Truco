@@ -333,29 +333,28 @@ function truco()
             }
             else
             {
-                console.log("336 entrando en Mano del juego: "+mano);
                 if ((cartaAjugar=="1")||(cartaAjugar=="2")||(cartaAjugar=="3")||(cartaAjugar=="7")) 
                 {
-//                    if ((cartaAjugar=="1")&&(arraymano[0][1]==false)) 
-//                    {
-//                        alert("LAZARILLO DICE: Paisano, la carta ya la jugaste!") 
-//                        mano--;   
-//                    }
-//                    else
+                    if ((cartaAjugar=="1")&&(arraymano[0][1]==false)) 
                     {
-//                        if ((cartaAjugar=="2")&&(arraymano[1][1]==false)) 
-//                        {
-//                            alert("LAZARILLO DICE: Esa carta ya la tiraste, no seas cabrón")
-//                            mano--;    
-//                        }
-//                        else
+                        alert("LAZARILLO DICE: Paisano, la carta ya la jugaste!") 
+                        mano--;   
+                    }
+                    else
+                    {
+                        if ((cartaAjugar=="2")&&(arraymano[1][1]==false)) 
                         {
-//                        if ((cartaAjugar=="3")&&(arraymano[2][1]==false)) 
-//                            {
-//                                alert("LAZARILLO DICE: ¿ENSERIO?, Ya tiraste esa carta!! mirá bien lo que haces!!")
-//                                mano--;    
-//                          }
- //                           else
+                            alert("LAZARILLO DICE: Esa carta ya la tiraste, no seas cabrón")
+                            mano--;    
+                        }
+                        else
+                        {
+                        if ((cartaAjugar=="3")&&(arraymano[2][1]==false)) 
+                            {
+                                alert("LAZARILLO DICE: ¿ENSERIO?, Ya tiraste esa carta!! mirá bien lo que haces!!")
+                                mano--;    
+                          }
+                           else
                             {
                                 //cartas permitidas aca
                                 alert("La carta que jugaste es...: "+arraymano[cartaAjugar-1][3]+" de "+palo[arraymano[cartaAjugar-1][4]])
@@ -881,18 +880,19 @@ function truco()
 //-------------         main del truco    ----------------------------------
 //--------------------------------------------------------------------------
 Nombre_Jugador=prompt("Hola!, me llamo Lazarillo, por favor identificate:")
-if(confirm("Hola "+Nombre_Jugador+" Yo me llamo Lazarillo ...¿JUGAMOS UN JUEGO?"))
+if(confirm("Hola "+Nombre_Jugador+" ...¿JUGAMOS UN JUEGO?"))
 {
-barajar();
-//envido();          //la funcion envido actualiza los puntos del juego
-seguirjuego=truco();
-alert("JUEGO TERMINADO"+'\n\n'+"Puntaje final: "+'\n'+
-        Nombre_Jugador+": "+puntosdeljuego[0]+'\n'+
-        "Lazarillo: "+puntosdeljuego[1])
+    alert("♥♦ BIENVENIDO AL JUEGO DE TRUCO ♣♠")
+    barajar();
+    envido();          //la funcion envido actualiza los puntos del juego
+    seguirjuego=truco();
+    alert("JUEGO TERMINADO"+'\n\n'+"Puntaje final: "+'\n'+
+            Nombre_Jugador+": "+puntosdeljuego[0]+'\n'+
+            "Lazarillo: "+puntosdeljuego[1])
 }
 else
 {
-    alert("No te asustes...no soy de la peli juegos de guerra...")
+    alert("No te asustes...no soy el de la película Juegos de guerra...")
 }
 
-        //fin?
+        //fin truco V 1.0
