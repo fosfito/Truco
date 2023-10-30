@@ -77,8 +77,6 @@ function mostrarresumen()           //muestraresumen de cartas por consola
 {
     //Resumen de la partida
     console.log("========================================================")
-    //console.log("Mano: "+mano)
-    //console.log("======="+'\n');
     console.log("A "+Nombre_Jugador+" le tocó: "+'\n'                                  //nro de carta + palo + si fue jugada
     +arraymano[0][3]+" de "+palo[arraymano[0][4]]+" "+arraymano[0][1]+'\n'  
     +arraymano[1][3]+" de "+palo[arraymano[1][4]]+" "+arraymano[1][1]+'\n'
@@ -870,7 +868,6 @@ function truco()
                 mensaje+="3 = Tirar "+carta3[3]+" de "+palo[carta3[4]]+'\n'
             }
             return mensaje
-    
     }
     
 //--------------------------------------------------------------------------
