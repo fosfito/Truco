@@ -182,7 +182,7 @@ function envido()
             //LAZARILLO MIRA SI TIENE FLOR
             if((arraymano[3][4]==arraymano[4][4])&&(arraymano[4][4]==arraymano[5][4]))
             {
-                alert("JUGADOR DICE: Envido!"+'\n'+
+                alert(Nombre_Jugador+" DICE: Envido!"+'\n'+
                     "LAZARILLO CANTA SOCARRON: Viniendo de chascomus en una lancha a vapor casi me caigo al agua por agarrar esta flor");
                 puntos[0]=true;
                 puntosdeljuego[1]+=3 //suma tres puntos lazarillo por flor
@@ -193,7 +193,7 @@ function envido()
                 if (envidolazarillo>20) 
                 {
                     puntos[0]=true;
-                    alert("JUGADOR DICE: Envido carajo!"+'\n'+
+                    alert(Nombre_Jugador+" DICE: Envido !"+'\n'+
                     "LAZARILLO RESPONDE: Quiero a tu envido!")
                     evaluarenvido(envidohumano, envidolazarillo)
                 }
@@ -280,12 +280,12 @@ function evaluarenvido(envidoH, envidoL)
 {
     if(envidoH>=envidoL)
     {
-        alert("Los "+envidoH+" puntos del humano son mejores que los "+envidoL+" puntos de lazarillo")
+        alert("Los "+envidoH+" puntos de "+Nombre_Jugador+" son mejores que los "+envidoL+" puntos de lazarillo")
         puntosdeljuego[0]+=2;
     }
     else
     {
-        alert("Los "+envidoL+" puntos de Lazarillo le ganan a los "+envidoH+" puntos del jugador")
+        alert("Los "+envidoL+" puntos de Lazarillo le ganan a los "+envidoH+" puntos de "+Nombre_Jugador)
         puntosdeljuego[1]+=2;
     }
 }
@@ -370,7 +370,6 @@ function truco()
                                 //Si mano=1 sumo quien gano o me fijo si es parda
                                 if(mano==1)
                                 {
-                                    console.log("Entro en mano 1, mano vale="+mano);
                                     if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
                                     { 
                                         alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" de "+ Nombre_Jugador+", le gano al"+'\n'+
@@ -403,7 +402,6 @@ function truco()
                                 
                                 if(mano==2)
                                 {
-                                    console.log("Entro en mano 2, mano vale="+mano);
                                     if(ComparadorTruco[0][2]>ComparadorTruco[1][2])   //si la carta del usuario le gana a Lazarillo
                                     { 
                                         alert("El "+ComparadorTruco[0][3]+" de "+palo[ComparadorTruco[0][4]]+" de "+Nombre_Jugador+", le ganó al"+'\n'+
@@ -519,7 +517,6 @@ function truco()
                                 //mano 3
                                 if(mano==3)
                                 {   
-                                    console.log("Entro en mano 3, mano vale="+mano); 
                                     if((totalmano==0)&&(mano==3))
                                     {
                                         console.log("Mano error?: "+mano);
@@ -636,7 +633,7 @@ function truco()
                                 {
                                        
                                 }
-                                console.log("Mano: "+mano+"- Puntos de Lazarillo: "+totalmano);        //muestro los puntos de la pc
+                                console.log("Mano terminada: "+mano) // - Puntos de Lazarillo: "totalmano);        muestro los puntos de la pc
                                 mostrarresumen()          //muestro resumen de la partida en consola para control
                             }
                         }  
